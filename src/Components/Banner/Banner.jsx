@@ -12,7 +12,7 @@ const Banner = () => {
             <Carousel 
                 className="plo" 
                 autoPlay 
-                interval={900} 
+                interval={2000} 
                 infiniteLoop
                 showThumbs={true}
                 showStatus={true}
