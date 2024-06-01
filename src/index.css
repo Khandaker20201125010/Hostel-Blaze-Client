@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.con {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.con span {
+    position: absolute;
+    left: 0;
+    width: 32px;
+    height: 6px;
+    background: #2c4766;
+    border-radius: 8px;
+    transform-origin: 140px;
+    transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+    animation: animateBlink 3s linear infinite;
+    animation-delay: calc(var(--i) * (3s / 50));
+}
+
+@keyframes animateBlink {
+    0% {
+        background: #0ef;
+    }
+
+    25% {
+        background: #2c4766;
+    }
+}
+
+.login-box {
+    position: absolute;
+    width: 400px;
+    /* background: red; */
+}
+
+.login-box form {
+    width: 100%;
+    padding: 0 50px;
+}
+
+h2 {
+    font-size: 2em;
+    color: #0ef;
+    text-align: center;
+}
+
+.input-box {
+  position: relative;
+  margin: 25px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #2c4766;
+  outline: none;
+  border-radius: 40px;
+  font-size: 1em;
+  color: #fff;
+  padding: 0 20px;
+  transition: .5s ease;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+
+
+
+.input-box input:focus,
+.input-box input:valid {
+    border-color: #0ef;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s ease;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: 1px;
+    font-size: .8em;
+    background: #1f293a;
+    padding: 0 6px;
+    color: #0ef;
+}
+
+.forgot-pass {
+    margin: -15px 0 10px;
+    text-align: center;
+}
+
+.forgot-pass a {
+    font-size: .85em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.forgot-pass a:hover {
+    text-decoration: underline;
+}
+
+
+.signup-link {
+    margin: 20px 0 10px;
+    text-align: center;
+}
+
+.signup-link a {
+    font-size: 1em;
+    color: #0ef;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+.lk{
+  background-image: url('./assets/images/blackbg.jpg');;
+}
+@keyframes changeColors {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #6a51da, #8305bd, #022e8b);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: changeColors 5s infinite;
+}
+
+.carousel .slider-wrapper{
+  width: 100%;
+  height: 750px;
+
+}
+.carousel  .thumb{
+  width: 5%;
+  height: 50px;
+}
+.carousel{
+  text-align: center;
+}
