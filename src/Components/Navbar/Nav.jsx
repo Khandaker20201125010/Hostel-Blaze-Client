@@ -68,7 +68,7 @@ const Nav = () => {
     );
 
     return (
-        <div className="navbar fixed z-10 bg-opacity-30 w-full bg-black font-bold text-white">
+        <div className="navbar lg:fixed lg:z-10 md:fixed md:z-10 bg-opacity-30 w-full bg-black font-bold text-white">
             <div className="navbar-start ">
                 <div className="dropdown">
                     <div role="button" className="btn btn-ghost hidden">

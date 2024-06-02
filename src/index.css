@@ -155,7 +155,7 @@ h2 {
 }
 
 .text-gradient {
-    background: linear-gradient(to right, #6a51da, #8305bd, #022e8b);
+    background: linear-gradient(to right, #6a51da,#022e8b, #8305bd);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -167,7 +167,7 @@ h2 {
   height: 750px;
 
 }
-.carousel  .thumb{
+.carousel.thumb{
   width: 5%;
   height: 50px;
 }
