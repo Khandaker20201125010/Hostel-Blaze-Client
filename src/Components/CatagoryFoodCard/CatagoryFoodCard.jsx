@@ -16,9 +16,9 @@ const CatagoryFoodCard = ({item}) => {
                 </div>
                 
              </div>
-             <p className="border-b-2 border-yellow-500 my-2"></p>
+             <p className="border-b-2 border-blue-500 my-2"></p>
              <div className=" flex justify-center">
-            <Link> <button className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Details</button></Link>
+            <Link> <button className="bg-white border-r-4 border-b-4 border-blue-600 hover:bg-black px-4 py-2 rounded-md my-3 text-blue-500 font-bold">Details</button></Link>
              </div>
         </div>
     );

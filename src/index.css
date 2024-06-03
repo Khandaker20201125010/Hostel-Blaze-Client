@@ -174,3 +174,12 @@ h2 {
 .carousel{
   text-align: center;
 }
+.tab-list .react-tabs__tab--selected {
+   
+    background: linear-gradient(to right, #6a51da,#2956b8, #8305bd);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: changeColors 5s infinite;
+    font-weight: bold;
+}

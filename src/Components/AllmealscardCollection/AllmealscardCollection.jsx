@@ -2,19 +2,18 @@ import { Link } from "react-router-dom";
 
 
 const AllmealscardCollection = ({item}) => {
-    const {image,distributorName,description,ingredients,postTime,rating,reviewerComment} =item
+    const {image,distributorName,description,ingredients,postTime,rating,reviewerComment,price} =item
     return (
-        <div className="shadow-lg p-4 flex flex-col group">
+        <div className="shadow-lg p-4 flex flex-col group animate__animated animate__bounceIn">
         <div className="flex justify-center mb-3">
            <img className="w-80 h-56 group-hover:scale-105" src={image} alt="" />
         </div>
         <div className="flex-grow space-y-2 font-bold">
-           <p>Scholarship Name : {distributorName}</p>
-           <p>University Name : {name}</p>
+           <p>distributor Name : {distributorName}</p>
            <p>University Country : {description}</p>
-           <p>Ingredients : {ingredients.join(", ")}</p>
+           {/* <p>Ingredients : {ingredients.join(", ")}</p> */}
            <div>
-               <p>PostDate :  {postTime}</p>
+               <p>Price :  {price}$</p>
              
            </div>
            <p>Degree : {rating}</p>
