@@ -115,10 +115,10 @@ const Register = () => {
                     passwordError && <p className="text-red-500">  {passwordError}</p>
                 }
 
-                <input className=" w-full px-4 py-2 text-center text-lg rounded-md from-blue-950 to-violet-900  hover:bg-orange-400 border hover:border-red-500 text-white font-bold my-3" type="submit" value="Register" />
+                <input className=" w-full px-4 py-2 text-center text-lg rounded-md from-blue-950 to-violet-900  hover:bg-violet-800 border hover:border-red-500 text-white font-bold my-3" type="submit" value="Register" />
             </form>
 
-            <p>Already have an account ? <Link to='/login' className="text-red-500 font-bold underline">please Login</Link></p>
+            <p className="text-white">Already have an account ? <Link to='/login' className="text-red-500 font-bold underline">please Login</Link></p>
 
 
 
