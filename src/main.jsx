@@ -14,6 +14,8 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Home from './Components/Home/Home';
 import { HelmetProvider } from 'react-helmet-async';
+import Privetroot from './Components/Privetroot/Privetroot';
+import Details from './Components/Details/Details';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
       {
         path:'/Meals',
         element:<Meals></Meals>,
+        loader: () => fetch('http://localhost:5000/meals')
 
       },
       {
@@ -44,6 +47,12 @@ const router = createBrowserRouter([
         path:'/Register',
         element:<Register></Register>,
 
+      },
+      {
+        path:'/details/:id',
+        element:<Privetroot><Details></Details></Privetroot>,
+        loader: () => fetch('http://localhost:5000/meals')
+        
       },
     ]
   },

@@ -183,3 +183,12 @@ h2 {
     animation: changeColors 5s infinite;
     font-weight: bold;
 }
+.b1{
+    background-image: url('./assets/images/b1.jpg');
+    display: flex;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 70vh;
+}

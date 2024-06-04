@@ -26,7 +26,7 @@ const Banner = () => {
                                 <p className="text-sm md:text-lg text-gray-300 mb-4"> Discover your home away from home at Wanderlust Hostel, where adventure meets comfort. Located in the heart of the city, our hostel offers affordable accommodations, vibrant community spaces, and unforgettable experiences. Whether you're a solo traveler, a group of friends, or on a business trip, we provide the perfect base to explore and create lasting memories. Book your stay with us and embark on your next adventure!</p>
                                 <div className="join w-full md:w-96 mt-5">
                                     <input type="text" placeholder="Search" className="input input-bordered join-item w-full" />
-                                    <button className="btn btn-primary join-item">Search</button>
+                                    <button className="btn bg-gradient-to-r from-violet-950 to-blue-900 text-white join-item">Search</button>
                                 </div>
                             </div>
                         </div>

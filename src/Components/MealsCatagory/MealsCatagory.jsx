@@ -15,7 +15,7 @@ const MealsCatagory = () => {
 
 
     return (
-        <div>
+        <div className=''>
             <div>
                 <SectionTitle   heading={"Fuel your day"} subHeading={"Here you can check out the Meals by Category and details to order the your meals"}>
                   
@@ -30,22 +30,22 @@ const MealsCatagory = () => {
                 </TabList>
                 <TabPanel>
                     
-                    <div data-aos="zoom-in-up" className='container  grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5 '>
+                    <div data-aos="zoom-in-up" className='container m-auto grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5 '>
                         {breakfast.map(item => <CatagoryFoodCard key={item._id} item={item}></CatagoryFoodCard>)}
                     </div>
                 </TabPanel>
                 <TabPanel>
-                    <div data-aos="zoom-in" className='container  grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5'>
+                    <div data-aos="zoom-in" className='container  m-auto   grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5'>
                         {lunch.map(item => <CatagoryFoodCard key={item._id} item={item}></CatagoryFoodCard>)}
                     </div>
                 </TabPanel>
                 <TabPanel>
-                    <div data-aos="zoom-in-down" className='container grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5'>
+                    <div data-aos="zoom-in-down" className='container  m-auto grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5'>
                         {dinner.map(item => <CatagoryFoodCard key={item._id} item={item}></CatagoryFoodCard>)}
                     </div>
                 </TabPanel>
                 <TabPanel>
-                    <div data-aos="zoom-out-up"  className='container grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5'>
+                    <div data-aos="zoom-out-up"  className='container  m-auto grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-5'>
                         {meals.map(item => <CatagoryFoodCard key={item._id} item={item}></CatagoryFoodCard>)}
                     </div>
                 </TabPanel>
