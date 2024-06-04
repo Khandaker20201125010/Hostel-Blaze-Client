@@ -13,6 +13,7 @@
     "@egjs/react-infinitegrid": "^4.11.1",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
+    "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",

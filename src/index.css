@@ -192,3 +192,12 @@ h2 {
     background-size: cover;
     height: 70vh;
 }
+.d1{
+    background-image: url('./assets/images/detailsimg.png');
+    display: flex;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 70vh;
+}

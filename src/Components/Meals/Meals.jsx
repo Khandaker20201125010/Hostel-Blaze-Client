@@ -9,11 +9,20 @@ const Meals = () => {
     const [meals] = useMeals();
     const meal = useLoaderData();
     const [search, setSearch] = useState('');
-    const [filteredMeals, setFilteredMeals] = useState(meals);
+    const [filteredMeals, setFilteredMeals] = useState([]);
+    const [item, setItem] = useState([]);
+    const [originalMeals, setOriginalMeals] = useState([]);
 
     useEffect(() => {
         setFilteredMeals(meals.filter(meal => meal.title.toLowerCase().includes(search.toLowerCase())));
     }, [search, meals]);
+
+    useEffect(() => {
+        const sortedMeals = [...meal].sort((x, y) => x.price - y.price); // Sort by ascending price initially
+        setOriginalMeals(meal); // Store the original order of meals
+        setFilteredMeals(sortedMeals);
+        setItem(sortedMeals);
+    }, [meal]);
 
     const handleSearch = e => {
         e.preventDefault();
@@ -21,14 +30,15 @@ const Meals = () => {
         setSearch(text);
     };
 
-    const [item, setItem] = useState(meal);
     const handleSort = (element) => {
         if (element === 'Ascending') {
-            const asc = [...item].sort((x, y) => x.price - y.price);
-            setItem(asc);
+            const asc = [...filteredMeals].sort((x, y) => x.price - y.price);
+            setFilteredMeals(asc);
         } else if (element === 'Descending') {
-            const des = [...item].sort((x, y) => y.price - x.price);
-            setItem(des);
+            const des = [...filteredMeals].sort((x, y) => y.price - x.price);
+            setFilteredMeals(des);
+        } else if (element === 'Default') {
+            setFilteredMeals(originalMeals); // Restore the original order
         }
     };
 
@@ -43,12 +53,12 @@ const Meals = () => {
                                 type="search" 
                                 name="search" 
                                 placeholder="Search" 
-                                className="border-2 border-violet-950 rounded-l-md w-full px-4 py-2  mb-10" 
+                                className="border-2 border-violet-950 rounded-l-md w-full px-4 py-2 mb-10  " 
                             />
                             <input 
                                 type="submit" 
                                 value="Search" 
-                                className="rounded-r-md bg-gradient-to-r from-violet-950 to-blue-900  text-white font-bold px-4 py-2 mb-10" 
+                                className="rounded-r-md bg-gradient-to-r from-violet-950 to-blue-900 text-white font-bold px-4 py-2 mb-10" 
                             />
                         </div>
                     </form>
@@ -56,12 +66,13 @@ const Meals = () => {
             </div>
             <div className="my-5 flex justify-center items-center">
                 <details className="dropdown">
-                    <summary className="m-1 btn font-bold flex gap-2 justify-center items-center bg-gradient-to-r from-violet-950 to-blue-900 text-white ">
-                        Select spot By<FaChevronDown />
+                    <summary className="m-1 text-white btn font-bold flex gap-2 justify-center items-center bg-gradient-to-r from-violet-950 to-blue-900 ">
+                        Select sort By<FaChevronDown />
                     </summary>
                     <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-32">
-                        <li onClick={() => handleSort('Ascending')} className="font-bold mb-3 text-center btn"> High Price </li>
-                        <li onClick={() => handleSort('Descending')} className="font-bold mb-3 text-center btn"> Low Price </li>
+                        <li onClick={() => handleSort('Ascending')} className="font-bold mb-3 text-center btn"> Low Price </li>
+                        <li onClick={() => handleSort('Descending')} className="font-bold mb-3 text-center btn"> High Price </li>
+                        <li onClick={() => handleSort('Default')} className="font-bold mb-3 text-center btn"> Default Price </li>
                     </ul>
                 </details>
             </div>

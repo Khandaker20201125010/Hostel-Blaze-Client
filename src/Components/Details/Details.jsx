@@ -22,10 +22,15 @@ const Details = () => {
    
     return (
         <div>
-            <div className="mt-10 md:flex shadow-lg  gap-10 md:p-10 ">
-                <Helmet>
+              <Helmet>
                     <title>Details</title>
                 </Helmet>
+                <div className="d1">
+                     <h1 className=" mt-72 rounded-xl text-center m-auto bg-black/30 p-10  text-6xl text-white font-bold flex justify-center">Check the Details</h1>
+                </div>
+            <div className="md:flex shadow-lg  gap-10 md:p-10  ">
+              
+               
                 <div className="md:flex-1 flex justify-center">
                     <img className="w-[600px] h-full max-sm:mb-5 rounded-2xl" src={mealImage} alt="" />
                 </div>
