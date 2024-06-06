@@ -1,24 +1,42 @@
 import { Helmet } from "react-helmet";
-import { Link, Navigate, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link,  useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Providers/Authprovider";
-import { useContext } from "react";
-import Swal from "sweetalert2";
-
+import { useContext, useEffect, useState } from "react";
+import axios from 'axios';
 const Details = () => {
     const { user } = useContext(AuthContext)
-    const navigate = useNavigate()
     const { id } = useParams();
     const meals = useLoaderData();
     const details = meals?.find(item => item._id === id)
-    const { _id, country, price, quantity, category, title,  mealImage, description,ingredients } = details
+    const { _id, country, price, like, category, title,  mealImage, description,ingredients } = details
     const currentDate = new Date(Date.now());
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
     const day = currentDate.getDate();
+    const [likes, setLikes] = useState(0);
+
+
+    const updatedFoods = { _id, time:{year:year,month:month,day:day}, title, like: parseInt(like) + 1,description, price, category, adminName: user?.displayName, mealImage, isSold: true, buyersEmail: user?.email,ingredients };
     
-
-
-    const updatedFoods = { _id, time:{year:year,month:month,day:day}, title, quantity: parseInt(quantity) - 1,description, price, category, adminName: user?.displayName, mealImage, isSold: true, buyersEmail: user?.email,ingredients };
+        useEffect(() => {
+            axios.get('http://localhost:5000/likes')
+              .then(response => {
+                setLikes(response.data.count);
+              })
+              .catch(error => {
+                console.error('There was an error fetching the likes!', error);
+              });
+          }, []);
+        
+          const handleLike = () => {
+            axios.post('http://localhost:5000/meals')
+              .then(response => {
+                setLikes(response.data.count);
+              })
+              .catch(error => {
+                console.error('There was an error updating the likes!', error);
+              });
+          };
    
     return (
         <div>
@@ -42,7 +60,7 @@ const Details = () => {
                     <p>{description}</p>
                     <div className='flex justify-between'>
                         <h2 className="font-bold">Country: {country}</h2>
-                        <h2 className="font-bold text-red-500">Quantity: <span className='mx-1'>{quantity}</span></h2>
+                       
 
                     </div>
                     <p className="font-bold">Price: {price} $</p>
@@ -51,7 +69,8 @@ const Details = () => {
                     <div className="flex justify-between">
                         <Link to={-1}><button className="  my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">Back</button></Link>
 
-                        <Link  to={`/purchase/uptodate/${_id}`} ><button className="  my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">Purchase Now</button></Link>
+                        <Link  to={`/meals/uptodate/${_id}`} ><button className="  my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">Request meal</button></Link>
+                        <button onClick={handleLike} className="  my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">{like}</button>
 
                     </div>
                 </div>

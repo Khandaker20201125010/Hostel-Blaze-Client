@@ -14,21 +14,31 @@ const Meals = () => {
     const [originalMeals, setOriginalMeals] = useState([]);
 
     useEffect(() => {
-        setFilteredMeals(meals.filter(meal => meal.title.toLowerCase().includes(search.toLowerCase())));
+        setFilteredMeals(meals.filter(meal => meal.title && meal.title.toLowerCase().includes(search.toLowerCase())));
     }, [search, meals]);
-
+    
     useEffect(() => {
+        console.log("Meal object:", meal); // Add this line to see the meal object
         const sortedMeals = [...meal].sort((x, y) => x.price - y.price); // Sort by ascending price initially
         setOriginalMeals(meal); // Store the original order of meals
         setFilteredMeals(sortedMeals);
         setItem(sortedMeals);
     }, [meal]);
+    
 
+    // const handleSearch = e => {
+    //     e.preventDefault();
+    //     const text = e.target.search.value;
+
+    //     setSearch(text);
+    // };
     const handleSearch = e => {
         e.preventDefault();
-        const text = e.target.search.value;
+        const text = e.target.search.value; // This line is causing the error
+    
         setSearch(text);
     };
+    
 
     const handleSort = (element) => {
         if (element === 'Ascending') {
@@ -49,16 +59,16 @@ const Meals = () => {
                     <h1 className="p-40 text-white text-6xl">Welcome to HostelBlaze Meals</h1>
                     <form onSubmit={handleSearch} className="my-5">
                         <div className="flex md:w-2/4 m-auto">
-                            <input 
-                                type="search" 
-                                name="search" 
-                                placeholder="Search" 
-                                className="border-2 border-violet-950 rounded-l-md w-full px-4 py-2 mb-10  " 
+                            <input
+                                type="search"
+                                name="search"  // Make sure the name attribute is "search"
+                                placeholder="Search"
+                                className="border-2 border-violet-950 rounded-l-md w-full px-4 py-2 mb-10  "
                             />
-                            <input 
-                                type="submit" 
-                                value="Search" 
-                                className="rounded-r-md bg-gradient-to-r from-violet-950 to-blue-900 text-white font-bold px-4 py-2 mb-10" 
+                            <input
+                                type="submit"
+                                value="Search"
+                                className="rounded-r-md bg-gradient-to-r from-violet-950 to-blue-900 text-white font-bold px-4 py-2 mb-10"
                             />
                         </div>
                     </form>
