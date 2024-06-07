@@ -12,7 +12,7 @@ const AllmealscardCollection = ({item}) => {
         <div className="flex-grow space-y-2 font-bold">
            <p>title: {title}</p>
            <p>University Country : {description}</p>
-           {/* <p>Ingredients : {ingredients.join(", ")}</p> */}
+           <p className=""><span className="text-bold text-xl">Ingredients:</span> {ingredients ? ingredients.join(', ') : 'No ingredients available'}</p>
            <div>
                <p>Price :  {price}$</p>
              

@@ -1,12 +1,13 @@
 import axios from "axios";
+
+
 const axiosSecure = axios.create({
     baseURL: 'http://localhost:5000'
 });
-const UseAxoisHook = () => {
-   
-        return axiosSecure;
 
+const useCountAxois = () => {
+    return axiosSecure;
+   
 };
 
-export default UseAxoisHook;
-
+export default useCountAxois;

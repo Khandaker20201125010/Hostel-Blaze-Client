@@ -10,7 +10,7 @@ const SingleReqMeals = () => {
     const { id } = useParams();
     const meals = useLoaderData();
     const details = meals?.find(item => item._id === id)
-    const { _id, country, price, quantity, category, title,  mealImage, description,ingredients,time } = details
+    const { _id, price, quantity, category, title,  mealImage, description,ingredients,time } = details
     const currentDate = new Date(Date.now());
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
