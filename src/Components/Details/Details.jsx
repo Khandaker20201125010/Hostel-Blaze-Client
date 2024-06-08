@@ -43,6 +43,7 @@ const Details = () => {
                 email: user.email,
                 name: user.displayName, 
                 mealImage,
+                
             };
             axioSecure.post('/carts', cartItem)
                 .then(res => {

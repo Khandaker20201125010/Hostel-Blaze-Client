@@ -35,7 +35,7 @@ const MyProfile = () => {
                         </div>
                         <h2 className="md:text-2xl text-lg my-5 font-bold text-center">Name : {loggedInUser?.name}</h2>
                         <p className="text-center mb-5">Email: {loggedInUser?.email}</p>
-                        <p className="text-center mb-5">Role: {loggedInUser?.role}</p>
+                        <p className="text-center mb-5">Badge: {loggedInUser?.badge}</p>
                     </div>
                 )
             }

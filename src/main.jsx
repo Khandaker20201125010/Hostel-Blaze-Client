@@ -21,6 +21,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import RequestedMeals from './Components/Udashboard/RequestedMeals';
 import MyProfile from './Components/Myprofile/MyProfile';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ManageUsers from './Components/ADashboard/ManageUsers';
 
 
 
@@ -77,10 +78,13 @@ const router = createBrowserRouter([
       path: 'uDashboard/myProfile',
       element: <Privetroot><MyProfile></MyProfile></Privetroot>,
       loader: () => fetch('http://localhost:5000/users')
-
-    
-
-    },]
+    }, 
+    {
+      path: 'uDashboard/manageUsers',
+      element: <ManageUsers></ManageUsers>,
+      loader: () => fetch('http://localhost:5000/users')
+    },
+  ]
   }
 ]);
 const queryClient = new QueryClient()

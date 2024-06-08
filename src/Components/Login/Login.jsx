@@ -31,6 +31,8 @@ const Login = () => {
                 const userInfo = {
                     name: user.displayName,
                     email: user.email,
+                    photoURL: user.photoURL,
+                    badge: 'Bronze',
                 };
 
                 axiosPublic.post('/users', userInfo)
@@ -64,6 +66,8 @@ const Login = () => {
                 const userInfo = {
                     name: loggedInUser.displayName,
                     email: loggedInUser.email,
+                    photoURL: loggedInUser.photoURL,
+                    badge: 'Bronze',
                 };
 
                 axiosPublic.post('/users', userInfo)
@@ -90,12 +94,14 @@ const Login = () => {
 
     const gitSignIn = () => {
         signInWithPopup(auth, githubProvider)
-            .then(result => {
-                const loggedInUser = result.user;
-                const userInfo = {
-                    name: loggedInUser.displayName,
-                    email: loggedInUser.email,
-                };
+        .then(result => {
+            const loggedInUser = result.user;
+            const userInfo = {
+                name: loggedInUser.displayName,
+                email: loggedInUser.email,
+                photoURL: loggedInUser.photoURL,
+                badge: 'Bronze', // Set the badge value here
+            };
 
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
