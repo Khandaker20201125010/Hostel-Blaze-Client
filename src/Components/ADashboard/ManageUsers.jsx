@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useCountAxois from "../AxoisHook/useCountAxois";
+import Swal from "sweetalert2";
 
 
 const ManageUsers = () => {
     const axiosSecure = useCountAxois();
-    const{data:users =[]} = useQuery({
+    const{data:users =[],refetch} = useQuery({
         queryKey:['users'],
         queryFn: async () =>{
              const res = await  axiosSecure.get ('/users')
@@ -12,6 +13,23 @@ const ManageUsers = () => {
         }
 
     });
+    const handelMakeAdmin = user =>{
+
+         axiosSecure.patch(`/users/admin/${user._id}`)
+         .then (res =>{
+          if(res.data.modifiedCount >0){
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title:`${user.name} is an Admin Now`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+         })
+
+    }
     return (
         <div>
             <div className="container mx-auto p-4">
@@ -36,12 +54,12 @@ const ManageUsers = () => {
                 <td className="py-3 px-4 border-b border-gray-200">{user.email}</td>
                 <td className="py-3 px-4 border-b border-gray-200">{user.Status}</td>
                 <td className="py-3 px-4 border-b border-gray-200">
-                  <button
+               {user.role === 'admin'? 'Admin': <button onClick={() => handelMakeAdmin(user) }
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
                     
                   >
                     Make Admin
-                  </button>
+                  </button>}
                 </td>
               </tr>)
            }

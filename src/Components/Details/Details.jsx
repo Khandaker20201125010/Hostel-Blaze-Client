@@ -20,8 +20,8 @@ const Details = () => {
     const [likes, setLikes] = useState(0);
     const navigate = useNavigate();
     const axioSecure = useCountAxois();
-    const location =useLocation();
-    const [,refetch]= useMealQuary ()
+    const location = useLocation();
+    const [, refetch] = useMealQuary()
 
     const updatedFoods = { _id, time: { year, month, day }, title, like: parseInt(like) + 1, description, price, category, adminName: user?.displayName, mealImage, isSold: true, buyersEmail: user?.email, ingredients };
 
@@ -37,18 +37,32 @@ const Details = () => {
 
     const handelAddCart = () => {
         if (user && user.email) {
+            if (!user.isSubscribed) {
+                Swal.fire({
+                    title: "Subscription Required",
+                    text: "You need to subscribe to request this meal.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Subscribe Now"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/subscription');
+                    }
+                });
+                return;
+            }
 
             const cartItem = {
                 menuID: _id,
                 email: user.email,
-                name: user.displayName, 
+                name: user.displayName,
                 mealImage,
-                
             };
             axioSecure.post('/carts', cartItem)
                 .then(res => {
-                    
-                    if (res.data.insertedId) { 
+                    if (res.data.insertedId) {
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
@@ -56,8 +70,7 @@ const Details = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        refetch()
-                         navigate(`/details/${_id}`)
+                        refetch();
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -80,7 +93,7 @@ const Details = () => {
                 confirmButtonText: "Yes, Log in!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate('/Login',{state:{from: location}});
+                    navigate('/Login', { state: { from: location } });
                 }
             });
         }

@@ -22,6 +22,7 @@ import RequestedMeals from './Components/Udashboard/RequestedMeals';
 import MyProfile from './Components/Myprofile/MyProfile';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ManageUsers from './Components/ADashboard/ManageUsers';
+import Subscription from './Components/Subscription/Subscription';
 
 
 
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
       {
         path: '/Register',
         element: <Register></Register>,
+
+      },
+      {
+        path: '/subscription',
+        element: <Subscription></Subscription>,
 
       },
       {
