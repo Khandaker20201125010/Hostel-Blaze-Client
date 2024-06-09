@@ -17,21 +17,12 @@ const auth = getAuth(app);
 const Authprovider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const googleProvider = new GoogleAuthProvider();
-    const gitProvider = new GithubAuthProvider();
     const axiosPublic = userAxiosPublic();
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
-     const googleSignIn = () => {
-        setLoading(true);
-        return signInWithPopup(auth, googleProvider);
-    }
-     const gitSignIn = () => {
-        setLoading(true);
-        return signInWithPopup(auth, gitProvider);
-    }
+   
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
@@ -60,7 +51,7 @@ const Authprovider = ({ children }) => {
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
-                          
+                            setLoading(false);
                         }
                     })
             }
@@ -80,8 +71,7 @@ const Authprovider = ({ children }) => {
         user,
         loading,
         createUser,
-        googleSignIn,
-        gitSignIn,
+      
         signIn,
         logOut,
         updateUser

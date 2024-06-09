@@ -23,6 +23,7 @@ import MyProfile from './Components/Myprofile/MyProfile';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ManageUsers from './Components/ADashboard/ManageUsers';
 import Subscription from './Components/Subscription/Subscription';
+import AdminRoute from './Components/AdminRoute/AdminRoute';
 
 
 
@@ -87,8 +88,8 @@ const router = createBrowserRouter([
     }, 
     {
       path: 'uDashboard/manageUsers',
-      element: <ManageUsers></ManageUsers>,
-      loader: () => fetch('http://localhost:5000/users')
+      element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
+      
     },
   ]
   }

@@ -4,15 +4,18 @@ import { CgProfile } from "react-icons/cg";
 import { IoMdHome } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
 import { MdManageAccounts } from "react-icons/md";
+import useAdmin from "../AxoisHook/useAdmin";
+
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const [isAdmin] = useAdmin()
     return (
         <div className="flex">
             <div className="ml-20 w-64 min-h-screen bg-gradient-to-r from-violet-950 to-blue-900 ">
-                <h1 className="text-center text-3xl text-white font-bold mt-5">Admin Home</h1>
+                
                 {
                     isAdmin ? <>
+                    <h1 className="text-center text-2xl text-white font-bold mt-5">Admin Home</h1>
                         <ul className="text-white font-semibold">
                             <li className="flex p-4 gap-2" >
                                 <CgProfile className="text-2xl" />
@@ -44,6 +47,7 @@ const Dashboard = () => {
                     </>
                         :
                         <>
+                         <h1 className="text-center text-2xl text-white font-bold mt-5">User Home</h1>
                             <ul className="text-white font-semibold">
                                 <li className="flex p-4 gap-2" >
                                     <CgProfile className="text-2xl" />

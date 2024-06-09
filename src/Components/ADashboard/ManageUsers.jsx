@@ -1,21 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import useCountAxois from "../AxoisHook/useCountAxois";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../AxoisHook/useAxiosSecure";
+
+
+
+
 
 
 const ManageUsers = () => {
-    const axiosSecure = useCountAxois();
-    const{data:users =[],refetch} = useQuery({
-        queryKey:['users'],
-        queryFn: async () =>{
-             const res = await  axiosSecure.get ('/users')
-             return res.data;
-        }
-
-    });
+  const axiosSecure =  useAxiosSecure();
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+        const res = await axiosSecure.get('/users');
+        return res.data;
+    }
+})
     const handelMakeAdmin = user =>{
 
-         axiosSecure.patch(`/users/admin/${user._id}`)
+      axiosSecure.patch(`/users/admin/${user._id}`)
          .then (res =>{
           if(res.data.modifiedCount >0){
             refetch();

@@ -19,7 +19,7 @@ const Details = () => {
     const day = currentDate.getDate();
     const [likes, setLikes] = useState(0);
     const navigate = useNavigate();
-    const axioSecure = useCountAxois();
+    const axiosSecure = useCountAxois();
     const location = useLocation();
     const [, refetch] = useMealQuary()
 
@@ -60,7 +60,7 @@ const Details = () => {
                 name: user.displayName,
                 mealImage,
             };
-            axioSecure.post('/carts', cartItem)
+            axiosSecure.post('/carts', cartItem)
                 .then(res => {
                     if (res.data.insertedId) {
                         Swal.fire({

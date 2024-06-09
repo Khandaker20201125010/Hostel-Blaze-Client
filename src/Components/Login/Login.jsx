@@ -52,7 +52,7 @@ const Login = () => {
             .catch(error => {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'Seems like you don\'t have an account. Please register.',
+                    text: 'Seems like you dont have an account. Please register.',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
@@ -70,16 +70,23 @@ const Login = () => {
                     badge: 'Bronze',
                 };
 
+                // Navigate immediately after login
+                navigate(location.state?.from || '/');
+
+                // Send user data to the backend in the background
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'You have successfully logged in with Google',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            navigate(location.state?.from || '/');
-                        });
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'You have successfully logged in with Google',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error saving user data:", error);
                     });
             })
             .catch(error => {
@@ -100,29 +107,34 @@ const Login = () => {
                 name: loggedInUser.displayName,
                 email: loggedInUser.email,
                 photoURL: loggedInUser.photoURL,
-                badge: 'Bronze', // Set the badge value here
+                badge: 'Bronze',
             };
 
-                axiosPublic.post('/users', userInfo)
-                    .then(res => {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'You have successfully logged in with GitHub',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            navigate(location.state?.from || '/');
-                        });
+            // Navigate immediately after login
+            navigate(location.state?.from || '/');
+
+            // Send user data to the backend in the background
+            axiosPublic.post('/users', userInfo)
+                .then(res => {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'You have successfully logged in with GitHub',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
                     });
-            })
-            .catch(error => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
-                    confirmButtonText: 'OK'
+                })
+                .catch(error => {
+                    console.error("Error saving user data:", error);
                 });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
             });
+        });
     };
 
     const togglePasswordVisibility = () => {
