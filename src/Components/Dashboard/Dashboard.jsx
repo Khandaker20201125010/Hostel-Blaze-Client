@@ -19,27 +19,27 @@ const Dashboard = () => {
                         <ul className="text-white font-semibold">
                             <li className="flex p-4 gap-2" >
                                 <CgProfile className="text-2xl" />
-                                <NavLink to='uDashboard/myProfile'>Admin Profile</NavLink></li>
+                                <NavLink to='/uDashboard/adminProfile'>Admin Profile</NavLink></li>
                             <li className="flex p-4 gap-2">
                                 <MdManageAccounts className="text-2xl" />
-                                <NavLink to='uDashboard/manageUsers'>Manage Users</NavLink></li>
+                                <NavLink to='/uDashboard/manageUsers'>Manage Users</NavLink></li>
                             <li className="flex p-4 gap-2">
-                                <IoIosAddCircle className="text-2xl" /><NavLink to='uDashboard/addMeals'>Add Meals</NavLink></li>
+                                <IoIosAddCircle className="text-2xl" /><NavLink to='/uDashboard/addMeals'>Add Meals</NavLink></li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='uDashboard/allMeals'>All Meals</NavLink>
+                                <NavLink to='/uDashboard/allMeals'>All Meals</NavLink>
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdPayment className="text-2xl" />
-                                <NavLink to='uDashboard/allReviews'>All Reviews</NavLink>
+                                <NavLink to='/uDashboard/allReviews'>All Reviews</NavLink>
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='uDashboard/serveMeals'>Serve Meals</NavLink>
+                                <NavLink to='/uDashboard/serveMeals'>Serve Meals</NavLink>
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='uDashboard/upcomingMeals'>Upcoming Meals</NavLink>
+                                <NavLink to='/uDashboard/upcomingMeals'>Upcoming Meals</NavLink>
                             </li>
 
                         </ul>
@@ -51,15 +51,15 @@ const Dashboard = () => {
                             <ul className="text-white font-semibold">
                                 <li className="flex p-4 gap-2" >
                                     <CgProfile className="text-2xl" />
-                                    <NavLink to='uDashboard/myProfile'>My Profile</NavLink></li>
+                                    <NavLink to='/uDashboard/myProfile'>My Profile</NavLink></li>
                                 <li className="flex p-4 gap-2">
                                     <MdNoMealsOuline className="text-2xl" />
-                                    <NavLink to='uDashboard/requestedMeals'>Requested Meals</NavLink></li>
+                                    <NavLink to='/uDashboard/requestedMeals'>Requested Meals</NavLink></li>
                                 <li className="flex p-4 gap-2">
-                                    <MdRateReview className="text-2xl" /><NavLink to='uDashboard/myReviews'>My Reviews</NavLink></li>
+                                    <MdRateReview className="text-2xl" /><NavLink to='/uDashboard/myReviews'>My Reviews</NavLink></li>
                                 <li className="flex p-4 gap-2">
                                     <MdPayment className="text-2xl" />
-                                    <NavLink to='uDashboard/paymentHistory'>Payment History</NavLink>
+                                    <NavLink to='/uDashboard/paymentHistory'>Payment History</NavLink>
                                 </li>
 
                             </ul>

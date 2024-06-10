@@ -25,6 +25,10 @@ import ManageUsers from './Components/ADashboard/ManageUsers';
 import Subscription from './Components/Subscription/Subscription';
 import AdminRoute from './Components/AdminRoute/AdminRoute';
 import AddFood from './Components/AddFood/AddFood';
+import AdminProfile from './Components/AdminProfile/AdminProfile';
+import AdminAllFood from './Components/AdminAllFood/AdminAllFood';
+import UpdateItem from './Components/AdminUpdateItem/UpdateItem';
+import AdminAllReviews from './Components/AdminAllrevuews/AdminAllReviews';
 
 
 
@@ -83,22 +87,45 @@ const router = createBrowserRouter([
       element: <RequestedMeals></RequestedMeals>
     },
     {
-      path: 'uDashboard/myProfile',
+      path: 'myProfile',
       element: <Privetroot><MyProfile></MyProfile></Privetroot>,
       loader: () => fetch('http://localhost:5000/users')
     }, 
     {
-      path: 'uDashboard/manageUsers',
+      path: 'manageUsers',
       element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
       
     },
     {
-      path: 'uDashboard/addMeals',
+      path: 'addMeals',
       element: <AdminRoute><AddFood></AddFood></AdminRoute>,
+      
+    },
+    {
+      path: 'adminProfile',
+      element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>,
+      
+    },
+    {
+      path: 'allMeals',
+      element: <AdminRoute><AdminAllFood></AdminAllFood></AdminRoute>,
+    
+      
+    },
+    {
+      path: 'updateItem/:id',
+      element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+      loader: ({params}) => fetch(`http://localhost:5000/meals/${params.id}`)
+      
+    },
+    {
+      path: 'allReviews',
+      element: <AdminRoute><AdminAllReviews></AdminAllReviews></AdminRoute>,
       
     },
   ]
   }
+  
 ]);
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(

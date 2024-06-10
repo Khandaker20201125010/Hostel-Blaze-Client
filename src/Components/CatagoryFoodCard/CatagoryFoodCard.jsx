@@ -19,7 +19,7 @@ const CatagoryFoodCard = ({ item }) => {
 
             </div>
             <div className="mt-2">
-            <p className=""><span className="text-bold text-xl">Ingredients:</span> {ingredients ? ingredients.join(', ') : 'No ingredients available'}</p>
+            <p className=""><span className="text-bold text-xl">Ingredients:</span> {ingredients}</p>
 
             </div>
             <p className="border-b-2 border-blue-500 my-2"></p>
