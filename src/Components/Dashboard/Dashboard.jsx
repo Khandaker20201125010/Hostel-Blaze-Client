@@ -12,10 +12,10 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <div className="ml-20 w-64 min-h-screen bg-gradient-to-r from-violet-950 to-blue-900 ">
-                
+
                 {
                     isAdmin ? <>
-                    <h1 className="text-center text-2xl text-white font-bold mt-5">Admin Home</h1>
+                        <h1 className="text-center text-2xl text-white font-bold mt-5">Admin Home</h1>
                         <ul className="text-white font-semibold">
                             <li className="flex p-4 gap-2" >
                                 <CgProfile className="text-2xl" />
@@ -24,22 +24,22 @@ const Dashboard = () => {
                                 <MdManageAccounts className="text-2xl" />
                                 <NavLink to='uDashboard/manageUsers'>Manage Users</NavLink></li>
                             <li className="flex p-4 gap-2">
-                                <IoIosAddCircle className="text-2xl" /><NavLink to='uDashboard/myReviews'>Add Meal</NavLink></li>
+                                <IoIosAddCircle className="text-2xl" /><NavLink to='uDashboard/addMeals'>Add Meals</NavLink></li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='uDashboard/paymentHistory'>All Meals</NavLink>
+                                <NavLink to='uDashboard/allMeals'>All Meals</NavLink>
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdPayment className="text-2xl" />
-                                <NavLink to='uDashboard/paymentHistory'>All Reviews</NavLink>
+                                <NavLink to='uDashboard/allReviews'>All Reviews</NavLink>
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='uDashboard/paymentHistory'>Serve Meals</NavLink>
+                                <NavLink to='uDashboard/serveMeals'>Serve Meals</NavLink>
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='uDashboard/paymentHistory'>Upcoming Meals</NavLink>
+                                <NavLink to='uDashboard/upcomingMeals'>Upcoming Meals</NavLink>
                             </li>
 
                         </ul>
@@ -47,7 +47,7 @@ const Dashboard = () => {
                     </>
                         :
                         <>
-                         <h1 className="text-center text-2xl text-white font-bold mt-5">User Home</h1>
+                            <h1 className="text-center text-2xl text-white font-bold mt-5">User Home</h1>
                             <ul className="text-white font-semibold">
                                 <li className="flex p-4 gap-2" >
                                     <CgProfile className="text-2xl" />

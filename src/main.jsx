@@ -24,6 +24,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ManageUsers from './Components/ADashboard/ManageUsers';
 import Subscription from './Components/Subscription/Subscription';
 import AdminRoute from './Components/AdminRoute/AdminRoute';
+import AddFood from './Components/AddFood/AddFood';
 
 
 
@@ -89,6 +90,11 @@ const router = createBrowserRouter([
     {
       path: 'uDashboard/manageUsers',
       element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
+      
+    },
+    {
+      path: 'uDashboard/addMeals',
+      element: <AdminRoute><AddFood></AddFood></AdminRoute>,
       
     },
   ]
