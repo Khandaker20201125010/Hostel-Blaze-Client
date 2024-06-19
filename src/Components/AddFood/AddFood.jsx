@@ -14,7 +14,7 @@ const AddFood = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = userAxiosPublic();
     const axiosSecure = useAxiosSecure();
-    
+
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -22,7 +22,7 @@ const AddFood = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        
+
         if (res.data.success) {
             const menuItem = {
                 title: data.name,
@@ -33,15 +33,17 @@ const AddFood = () => {
                 description: data.description,
                 postTime: moment().format("MMM Do YY"),
                 likes: parseInt(data.likes),
-                reviews:[data.reviews],
+                reviews: [data.reviews],
                 adminName: data.adminName,
                 email: data.email,
-                distributorName: "Hostale Distributors" 
+                rating: parseInt(data.rating),
+                likers:[data.likers],
+                distributorName: "Hostale Distributors"
             };
 
             const menuRes = await axiosSecure.post('/meals', menuItem);
-            
-            if(menuRes.data.insertedId){
+
+            if (menuRes.data.insertedId) {
                 reset();
                 Swal.fire({
                     position: "top-end",
@@ -57,7 +59,7 @@ const AddFood = () => {
     return (
         <div className='min-h-screen w-5/6 m-auto mt-10 bg-gradient-to-r from-black to-blue-900 hover:bg-blue-800 p-5 '>
             <Helmet>
-                <title>Add Food</title>
+                <title>Add Meals</title>
             </Helmet>
             <SectionTitle heading="Add Meals" subHeading="What's New?" />
             <div>
@@ -102,20 +104,22 @@ const AddFood = () => {
                     </div>
                     {/* Recipe Details */}
                     <div className="gap-5 flex">
-                    <div className="form-control w-full  my-6">
+                        <div className="form-control w-full  my-6">
                             <label className="label">
                                 <span className="label-text text-white">Likes</span>
                             </label>
                             <input
                                 type="number"
+                                defaultValue={0}
                                 placeholder="Likes"
                                 {...register('likes', { required: true })}
                                 className="input input-bordered w-full"
+                                readOnly  
                             />
                         </div>
                         <div className="form-control w-full  my-6">
                             <label className="label">
-                                <span className="label-text">Rating</span>
+                                <span className="label-text text-white">Rating</span>
                             </label>
                             <input
                                 type="number"
@@ -125,7 +129,7 @@ const AddFood = () => {
                                 className="input input-bordered w-full"
                             />
                         </div>
-                    
+
                     </div>
                     {/* Ingredients */}
                     <div className="form-control">
@@ -173,10 +177,24 @@ const AddFood = () => {
                             />
                         </div>
                     </div>
-                  
+                    <div className="form-control w-full my-6">
+                        <label className="label">
+                            <span className="label-text text-white">Time</span>
+                        </label>
+                        <input
+                            type="text"
+                            defaultValue={moment().format("MMM Do YY")}
+                            placeholder={moment().format("MMM Do YY")}
+                            {...register('postTime', { required: true })}
+                            className="input input-bordered w-full"
+                            readOnly  
+                        />
+                    </div>
+
+
                     <div className="flex gap-6">
                         {/* Likes */}
-                     
+
                         {/* Upload Image */}
                         <div className="form-control w-full my-6 ">
                             <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />

@@ -1,39 +1,44 @@
 import { Helmet } from "react-helmet";
 import { Link, useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Providers/Authprovider";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import useCountAxois from "../AxoisHook/useCountAxois";
 import useMealQuary from "../useMeakQuary/useMealQuary";
+import { IoIosTimer } from "react-icons/io";
+import { AiOutlineLike } from "react-icons/ai";
+import { FaStar } from "react-icons/fa";
+import userAxiosPublic from "../AxoisHook/userAxiosPublic";
 
 const Details = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const meals = useLoaderData();
     const details = meals?.find(item => item._id === id);
-    const { _id, country, price, like, category, title, mealImage, description, ingredients } = details;
-    const currentDate = new Date(Date.now());
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
-    const [likes, setLikes] = useState(0);
+    const { _id, title, price, likes, likers, rating, mealImage, description, adminName, ingredients, postTime, category, reviews, email, distributorName } = details;
     const navigate = useNavigate();
     const axiosSecure = useCountAxois();
+    const axiosPublic = userAxiosPublic()
     const location = useLocation();
-    const [, refetch] = useMealQuary()
+    const [, refetch] = useMealQuary();
 
-    const updatedFoods = { _id, time: { year, month, day }, title, like: parseInt(like) + 1, description, price, category, adminName: user?.displayName, mealImage, isSold: true, buyersEmail: user?.email, ingredients };
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/likes')
-            .then(response => {
-                setLikes(response.data.count);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the likes!', error);
-            });
-    }, []);
+
+    const handleLike = () => {
+
+        const updatedDetails = { _id, title, likers: [...likers, user.email], price, likes: likes + 1, rating, mealImage, description, adminName, ingredients, postTime, category, reviews, email, distributorName }
+        if (likers.includes(user.email)) {
+            console.log('please like ')
+        } else {
+            const res = axios.patch(`http://localhost:5000/meals/like/${id}`, updatedDetails);
+            refetch()
+            console.log(res)
+
+        }
+
+
+    };
 
     const handelAddCart = () => {
         if (user && user.email) {
@@ -60,6 +65,7 @@ const Details = () => {
                 name: user.displayName,
                 mealImage,
             };
+
             axiosSecure.post('/carts', cartItem)
                 .then(res => {
                     if (res.data.insertedId) {
@@ -99,16 +105,6 @@ const Details = () => {
         }
     };
 
-    const handleLike = () => {
-        axios.post('http://localhost:5000/meals')
-            .then(response => {
-                setLikes(response.data.count);
-            })
-            .catch(error => {
-                console.error('There was an error updating the likes!', error);
-            });
-    };
-
     return (
         <div>
             <Helmet>
@@ -117,23 +113,44 @@ const Details = () => {
             <div className="d1">
                 <h1 className="mt-72 rounded-xl text-center m-auto bg-black/30 p-10 text-6xl text-white font-bold flex justify-center">Check the Details</h1>
             </div>
-            <div className="md:flex shadow-lg gap-10 md:p-10">
+            <div className="md:flex shadow-lg md:p-10">
                 <div className="md:flex-1 flex justify-center">
-                    <img className="w-[600px] h-full max-sm:mb-5 rounded-2xl" src={mealImage} alt="" />
+                    <img className="w-[600px] h-[450px] max-sm:mb-5 rounded-2xl" src={mealImage} alt="" />
                 </div>
+
                 <div className='md:flex-1 md:space-y-3'>
                     <h2 className="font-bold">Food Name: {title}</h2>
-                    <p className="font-bold text-xl">Made BY: {user?.displayName}</p>
-                    <h2 className="font-bold">Category: {category}</h2>
-                    <p>{description}</p>
+                    <h2 className="font-bold">Admin Name: {adminName}</h2>
+
+
+                    <p><span className="font-bold">Description:</span>{description}</p>
+                    <h3 className=""><span className="font-bold">Ingredients:</span> {ingredients}</h3>
                     <div className='flex justify-between'>
-                        <h2 className="font-bold">Country: {country}</h2>
+                        <h3 className="font-bold flex gap-2">Posting Time: {postTime}<IoIosTimer className="h-5 w-5" /></h3>
                     </div>
-                    <p className="font-bold">Price: {price} $</p>
+                    <div className="flex justify-between m-auto">
+                        <p className="font-bold">Price: {price} $</p>
+                        <div className=" flex items-center">
+                            <p className="flex items-center gap-2">
+                                <span className="font-bold text-xl">Rating:</span> {rating}
+                            </p>
+                            <FaStar className="text-yellow-500 ml-2" />
+                        </div>
+
+
+                    </div>
+                    <p className="font-bold flex items-center gap-1">
+                        <AiOutlineLike className="text-blue-500 h-10 w-10" />: {likes}
+                    </p>
+
+
+
                     <div className="flex justify-between">
-                        <Link to={-1}><button className="my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">Back</button></Link>
-                        <Link><button onClick={handelAddCart} className="my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">Request meal</button></Link>
-                        <button onClick={handleLike} className="my-5 text-center px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-400 border hover:border-red-500 text-white font-bold">{like}</button>
+                        <Link to={-1}><button className="my-5 text-center px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-400 border hover:border-red-500 text-white font-bold">Back</button></Link>
+                        <button onClick={handelAddCart} className="my-5 text-center px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-400 border hover:border-red-500 text-white font-bold">Request meal</button>
+                        <button onClick={handleLike} className="my-5 text-center px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-400 border hover:border-red-500 text-white font-bold flex items-center gap-2">
+                            <AiOutlineLike className="w-5 h-5" /> Like: {likes}
+                        </button>
                     </div>
                 </div>
             </div>

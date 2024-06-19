@@ -39,7 +39,7 @@ const Dashboard = () => {
                             </li>
                             <li className="flex p-4 gap-2">
                                 <MdNoMealsOuline className="text-2xl" />
-                                <NavLink to='/uDashboard/upcomingMeals'>Upcoming Meals</NavLink>
+                                <NavLink to='/uDashboard/addUpcomingMeals'>Upcoming Meals</NavLink>
                             </li>
 
                         </ul>

@@ -11,7 +11,7 @@ const Meals = () => {
     const [search, setSearch] = useState('');
     const [filteredMeals, setFilteredMeals] = useState([]);
     const [originalMeals, setOriginalMeals] = useState([]);
-    const [item, setItem] = useState([]);
+    const [, setItem] = useState([]);
     
 
     useEffect(() => {

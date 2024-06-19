@@ -29,6 +29,7 @@ import AdminProfile from './Components/AdminProfile/AdminProfile';
 import AdminAllFood from './Components/AdminAllFood/AdminAllFood';
 import UpdateItem from './Components/AdminUpdateItem/UpdateItem';
 import AdminAllReviews from './Components/AdminAllrevuews/AdminAllReviews';
+import AdminAddUpcomingMeals from './Components/AdminAddUpcomingMeals/AdminAddUpcomingMeals';
 
 
 
@@ -44,13 +45,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/Meals',
-        element: <Meals></Meals>,
+        element: <Privetroot><Meals></Meals></Privetroot>,
         loader: () => fetch('http://localhost:5000/meals')
 
       },
       {
         path: '/UpcomingMeals',
-        element: <UpcomingMealss></UpcomingMealss>,
+        element: <Privetroot><UpcomingMealss></UpcomingMealss></Privetroot>,
+        loader: () => fetch('http://localhost:5000/upComingMeals')
+
 
       },
       {
@@ -65,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/subscription',
-        element: <Subscription></Subscription>,
+        element:<Privetroot><Subscription></Subscription></Privetroot> ,
 
       },
       {
@@ -99,6 +102,11 @@ const router = createBrowserRouter([
     {
       path: 'addMeals',
       element: <AdminRoute><AddFood></AddFood></AdminRoute>,
+      
+    },
+    {
+      path: 'addUpcomingMeals',
+      element: <AdminRoute><AdminAddUpcomingMeals></AdminAddUpcomingMeals></AdminRoute>,
       
     },
     {
