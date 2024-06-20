@@ -31,6 +31,7 @@ import UpdateItem from './Components/AdminUpdateItem/UpdateItem';
 import AdminAllReviews from './Components/AdminAllrevuews/AdminAllReviews';
 import AdminAddUpcomingMeals from './Components/AdminAddUpcomingMeals/AdminAddUpcomingMeals';
 import UserReviews from './Components/UserReviews/UserReviews';
+import EditReview from './Components/EditReview/EditReview';
 
 
 
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/subscription',
-        element:<Privetroot><Subscription></Subscription></Privetroot> ,
+        element: <Privetroot><Subscription></Subscription></Privetroot>,
 
       },
       {
@@ -94,52 +95,58 @@ const router = createBrowserRouter([
       path: 'myProfile',
       element: <Privetroot><MyProfile></MyProfile></Privetroot>,
       loader: () => fetch('http://localhost:5000/users')
-    }, 
+    },
     {
       path: 'myReviews',
       element: <Privetroot><UserReviews></UserReviews></Privetroot>,
       loader: () => fetch('http://localhost:5000/users')
-    }, 
+    },
+    {
+      path: 'editReview/:id',
+      element: <Privetroot><EditReview></EditReview></Privetroot>,
+      loader: ({ params }) => fetch(`http://localhost:5000/meals/${params.id}`)
+    },
     {
       path: 'manageUsers',
       element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
-      
+
     },
     {
       path: 'addMeals',
       element: <AdminRoute><AddFood></AddFood></AdminRoute>,
-      
+
     },
     {
       path: 'addUpcomingMeals',
       element: <AdminRoute><AdminAddUpcomingMeals></AdminAddUpcomingMeals></AdminRoute>,
-      
+
     },
     {
       path: 'adminProfile',
       element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>,
-      
+
     },
     {
       path: 'allMeals',
       element: <AdminRoute><AdminAllFood></AdminAllFood></AdminRoute>,
-    
-      
+
+
     },
     {
       path: 'updateItem/:id',
       element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-      loader: ({params}) => fetch(`http://localhost:5000/meals/${params.id}`)
-      
+      loader: ({ params }) => fetch(`http://localhost:5000/meals/${params.id}`)
+
     },
+
     {
       path: 'allReviews',
       element: <AdminRoute><AdminAllReviews></AdminAllReviews></AdminRoute>,
-      
+
     },
-  ]
+    ]
   }
-  
+
 ]);
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(

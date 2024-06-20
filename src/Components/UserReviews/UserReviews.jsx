@@ -8,12 +8,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/Authprovider";
 
 const UserReviews = () => {
-    const [meals,, refetch] = useMeals();
+    const [meals, , refetch] = useMeals();
     const axiosSecure = useAxiosSecure();
     const [myReviews, setReviews] = useState([]);
     const { user } = useContext(AuthContext);
 
-    useEffect(() => {    
+    useEffect(() => {
         const rev = meals?.filter(item =>
             item?.reviews?.find(review => review?.reviewerEmail === user?.email)
         );
@@ -22,21 +22,21 @@ const UserReviews = () => {
 
     const handleDeleteItem = async (item) => {
         // try {
-            const updatedReviews = item.reviews.filter(review => review.reviewerEmail !== user.email);
-            const updatedItem = { ...item, reviews: updatedReviews };
+        const updatedReviews = item.reviews.filter(review => review.reviewerEmail !== user.email);
+        const updatedItem = { ...item, reviews: updatedReviews };
 
-            const response = await axiosSecure.patch(`/meals/reviews/${item._id}`, updatedItem);
+        const response = await axiosSecure.patch(`/meals/reviews/${item._id}`, updatedItem);
 
-            if (response.data.modifiedCount > 0) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Review deleted successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                refetch();
-            }
+        if (response.data.modifiedCount > 0) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Review deleted successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            refetch();
+        }
         // } catch (error) {
         //     Swal.fire({
         //         position: 'top-end',
@@ -73,7 +73,7 @@ const UserReviews = () => {
                                     <td>{item.likes}</td>
                                     <td>{(item?.reviews?.find(review => review?.reviewerEmail === user?.email))?.review}</td>
                                     <td>
-                                        <Link to={`/uDashboard/updateItem/${item._id}`}>
+                                        <Link to={`/uDashboard/editReview/${item._id}`}>
                                             <button className="btn btn-ghost btn-lg bg-blue-500">
                                                 <FaEdit className="text-white"></FaEdit>
                                             </button>
