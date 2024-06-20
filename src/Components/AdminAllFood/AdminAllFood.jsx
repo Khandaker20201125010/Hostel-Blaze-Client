@@ -7,7 +7,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import useAxiosSecure from "../AxoisHook/useAxiosSecure";
 
 const AdminAllFood = () => {
-    const [meals, refetch] = useMeals();
+    const [meals,, refetch] = useMeals();
     const axiosSecure = useAxiosSecure();
     const [sortBy, setSortBy] = useState("");
 

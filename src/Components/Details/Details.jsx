@@ -10,6 +10,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import moment from "moment"; // Import moment for review time
+import useMeals from "../Hooks/useMeals";
 
 const Details = () => {
     const { user } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const Details = () => {
     const navigate = useNavigate();
     const axiosSecure = useCountAxois();
     const location = useLocation();
-    const [, refetch] = useMealQuary();
+    const [,,refetch] = useMeals()
     const { register, handleSubmit, reset } = useForm();
 
     const handleLike = async () => {
@@ -47,7 +48,7 @@ const Details = () => {
     
         try {
             await axiosSecure.patch(`/meals/reviews/${id}`, updatedDetails);
-            refetch(); // Refetch data after updating reviews
+            refetch(); 
             reset();
             Swal.fire({
                 position: "top-end",

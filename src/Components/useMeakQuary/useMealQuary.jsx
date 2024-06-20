@@ -14,7 +14,7 @@ const useMealQuary = () => {
             return res.data;
         }
     });
-    return [cart, refetch];
+    return [cart,refetch];
 };
 
 export default useMealQuary;

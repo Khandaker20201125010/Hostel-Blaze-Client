@@ -7,7 +7,7 @@ import useAxiosSecure from "../AxoisHook/useAxiosSecure";
 
 
 const AdminAllReviews = () => {
-    const [meals, refetch] = useMeals();
+    const [meals,, refetch] = useMeals();
     const axiosSecure = useAxiosSecure();
    
 
