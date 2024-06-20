@@ -6,6 +6,8 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 import userAxiosPublic from '../AxoisHook/userAxiosPublic';
 import useAxiosSecure from '../AxoisHook/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { useContext } from 'react';
+import { AuthContext } from '../Providers/Authprovider';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -14,6 +16,7 @@ const AddFood = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = userAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
@@ -33,7 +36,11 @@ const AddFood = () => {
                 description: data.description,
                 postTime: moment().format("MMM Do YY"),
                 likes: parseInt(data.likes),
-                reviews: [data.reviews],
+                reviews: [{
+                    review: data.reviews,
+                    reviewerName: user.displayName,
+                    reviewerEmail: user.email,
+                }],
                 adminName: data.adminName,
                 email: data.email,
                 rating: parseInt(data.rating),

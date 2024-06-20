@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate,  } from "react-router-dom";
 import { AuthContext } from "../Providers/Authprovider";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
@@ -70,10 +70,10 @@ const Login = () => {
                     badge: 'Bronze',
                 };
 
-                // Navigate immediately after login
+              
                 navigate(location.state?.from || '/');
 
-                // Send user data to the backend in the background
+               
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {

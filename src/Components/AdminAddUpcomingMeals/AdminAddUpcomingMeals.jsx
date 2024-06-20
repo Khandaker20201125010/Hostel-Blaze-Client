@@ -36,6 +36,7 @@ const AdminAddUpcomingMeals = () => {
                 adminName: data.adminName,
                 email: data.email,
                 rating:parseInt(data.rating),
+                likers:[data.likers],   
                 distributorName: "Hostale Distributors"
             };
 

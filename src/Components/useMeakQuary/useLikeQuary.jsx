@@ -6,16 +6,16 @@ import { useQuery } from '@tanstack/react-query';
 const useLikeQuary = () => {
     const axiosSecure = useCountAxois();
     const { user } = useContext(AuthContext);
-    const {refetch, data: like = [] } = useQuery({
-        queryKey: ['like',user?.email],
+    const {refetch, data: meal = [] } = useQuery({
+        queryKey: ['meal',user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/likes?email=${user.email}`);
+            const res = await axiosSecure.get(`/meal?email=${user.email}`);
             return res.data;
             
         }
      
     });
-    return [like,refetch];
+    return [meal,refetch];
     
 };
 

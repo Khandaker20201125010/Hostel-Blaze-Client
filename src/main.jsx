@@ -30,6 +30,7 @@ import AdminAllFood from './Components/AdminAllFood/AdminAllFood';
 import UpdateItem from './Components/AdminUpdateItem/UpdateItem';
 import AdminAllReviews from './Components/AdminAllrevuews/AdminAllReviews';
 import AdminAddUpcomingMeals from './Components/AdminAddUpcomingMeals/AdminAddUpcomingMeals';
+import UserReviews from './Components/UserReviews/UserReviews';
 
 
 
@@ -92,6 +93,11 @@ const router = createBrowserRouter([
     {
       path: 'myProfile',
       element: <Privetroot><MyProfile></MyProfile></Privetroot>,
+      loader: () => fetch('http://localhost:5000/users')
+    }, 
+    {
+      path: 'myReviews',
+      element: <Privetroot><UserReviews></UserReviews></Privetroot>,
       loader: () => fetch('http://localhost:5000/users')
     }, 
     {
