@@ -17,7 +17,7 @@ const Register = () => {
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const axiosPublic = userAxios();
+    const axiosPublic =  userAxios()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

@@ -32,6 +32,7 @@ import AdminAllReviews from './Components/AdminAllrevuews/AdminAllReviews';
 import AdminAddUpcomingMeals from './Components/AdminAddUpcomingMeals/AdminAddUpcomingMeals';
 import UserReviews from './Components/UserReviews/UserReviews';
 import EditReview from './Components/EditReview/EditReview';
+import Payment from './Components/Payment/Payment';
 
 
 
@@ -100,6 +101,12 @@ const router = createBrowserRouter([
       path: 'myReviews',
       element: <Privetroot><UserReviews></UserReviews></Privetroot>,
       loader: () => fetch('http://localhost:5000/users')
+    },
+    {
+      path: 'payment/:id',
+      element: <Privetroot><Payment></Payment></Privetroot>,
+      loader: () => fetch('http://localhost:5000/membership')
+     
     },
     {
       path: 'editReview/:id',

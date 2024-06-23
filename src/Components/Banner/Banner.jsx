@@ -18,8 +18,8 @@ const Banner = () => {
                 showStatus={true}
             >
                  {[b1, b2, b3, b4, b5].map((image, index) => (
-                    <div key={index} className="relative h-full max-sm:mt-10">
-                        <img className="w-full h-full object-cover" src={image} alt={`Banner ${index + 1}`} />
+                    <div key={index} className="relative  max-sm:mt-10">
+                        <img className="w-full  banner-image" src={image} alt={`Banner ${index + 1}`} />
                         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center px-4 md:px-0">
                             <div className="mb-20 md:mb-80 text-center">
                                 <h1 className="text-2xl md:text-8xl font-bold text-gradient mb-4 md:mb-10">Welcome to Hostel Blaze</h1>

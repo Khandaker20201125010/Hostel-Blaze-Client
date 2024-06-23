@@ -1,16 +1,15 @@
+import  { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Providers/Authprovider";
-import { useContext } from "react";
 import Swal from "sweetalert2";
 import useCountAxois from "../AxoisHook/useCountAxois";
-import useMealQuary from "../useMeakQuary/useMealQuary";
+import useMeals from "../Hooks/useMeals";
 import { IoIosTimer } from "react-icons/io";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import moment from "moment"; // Import moment for review time
-import useMeals from "../Hooks/useMeals";
+import moment from "moment";
 
 const Details = () => {
     const { user } = useContext(AuthContext);
@@ -21,17 +20,15 @@ const Details = () => {
     const navigate = useNavigate();
     const axiosSecure = useCountAxois();
     const location = useLocation();
-    const [,,refetch] = useMeals()
+    const [,,refetch] = useMeals();
     const { register, handleSubmit, reset } = useForm();
 
     const handleLike = async () => {
-        if (likers.includes(user.email)) {
-            return;
-        } else {
-            const updatedDetails = { ...details, likers: [...likers, user.email], likes: likes + 1 };
-            await axiosSecure.patch(`/meals/like/${id}`, updatedDetails);
-            refetch(); // Refetch data after updating
-        }
+        if (likers.includes(user.email)) return;
+
+        const updatedDetails = { ...details, likers: [...likers, user.email], likes: likes + 1 };
+        await axiosSecure.patch(`/meals/like/${id}`, updatedDetails);
+        refetch();
     };
 
     const handleReviews = async (data) => {
@@ -39,16 +36,15 @@ const Details = () => {
             review: data.reviews,
             reviewerName: user.displayName,
             reviewerEmail: user.email,
+            reviewTime: moment().format('MMMM Do YYYY, h:mm:ss a')
         };
-    
-        
+
         const updatedReviews = reviews ? [...reviews, newReview] : [newReview];
-    
         const updatedDetails = { ...details, reviews: updatedReviews };
-    
+
         try {
             await axiosSecure.patch(`/meals/reviews/${id}`, updatedDetails);
-            refetch(); 
+            refetch();
             reset();
             Swal.fire({
                 position: "top-end",
@@ -67,69 +63,51 @@ const Details = () => {
         }
     };
 
-    const handleAddCart = async () => {
+    const handleAddToCart = () => {
         if (user && user.email) {
-            if (!user.isSubscribed) {
-                Swal.fire({
-                    title: "Subscription Required",
-                    text: "You need to subscribe to request this meal.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Subscribe Now"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate('/subscription');
-                    }
-                });
-                return;
-            }
-
+            //send cart item to the database
             const cartItem = {
                 menuID: _id,
                 email: user.email,
                 name: user.displayName,
                 mealImage,
-            };
-
-            try {
-                const res = await axiosSecure.post('/carts', cartItem);
-                if (res.data.insertedId) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Request has been sent",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    refetch(); // Refetch data after adding to cart
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    });
-                }
-            } catch (error) {
-                console.error('Error adding to cart:', error);
             }
-        } else {
+            axiosSecure.post('/carts', cartItem)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `${name} added to your cart`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        // refetch cart to update the cart items count
+                        refetch();
+                    }
+
+                })
+        }
+        else {
             Swal.fire({
-                title: "Please Log in",
-                text: "Please log in to add",
+                title: "You are not Logged In",
+                text: "Please login to add to the cart?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Log in!"
+                confirmButtonText: "Yes, login!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate('/Login', { state: { from: location } });
+                    //   send the user to the login page
+                    navigate('/Login', { state: { from: location } })
                 }
             });
         }
-    };
+    }
+    
+    
 
     return (
         <div>
@@ -141,7 +119,7 @@ const Details = () => {
             </div>
             <div className="md:flex shadow-lg md:p-10">
                 <div className="md:flex-1 flex justify-center">
-                    <img className="w-[600px] h-[450px] max-sm:mb-5 rounded-2xl" src={mealImage} alt="" />
+                    <img className="w-[600px] h-[450px] max-sm:mb-5 rounded-2xl" src={mealImage} alt={title} />
                 </div>
 
                 <div className='md:flex-1 md:space-y-3'>
@@ -167,9 +145,8 @@ const Details = () => {
 
                     <div className="flex justify-between">
                         <Link to={-1}><button className="my-5 text-center px-4 py-2 rounded-md bg-blue-700 hover:bg-blue-400 border hover:border-violet-500 text-white font-bold">Back</button></Link>
-                        {/* You can open the modal using document.getElementById('my_modal_4').showModal() method */}
                         <button className="btn my-5 bg-blue-700 text-white " onClick={() => document.getElementById('my_modal_4').showModal()}>Review</button>
-                        
+
                         <dialog id="my_modal_4" className="modal">
                             <form onSubmit={handleSubmit(handleReviews)} className="modal-box w-11/12 max-w-5xl">
                                 <div className="form-control">
@@ -184,7 +161,7 @@ const Details = () => {
                                 </div>
                             </form>
                         </dialog>
-                        <button onClick={handleAddCart} className="my-5 text-center px-4 py-2 rounded-md bg-blue-700 hover:bg-blue-400 border hover:border-violet-500 text-white font-bold">Request meal</button>
+                        <button onClick={handleAddToCart} className="my-5 text-center px-4 py-2 rounded-md bg-blue-700 hover:bg-blue-400 border hover:border-violet-500 text-white font-bold">Request meal</button>
                         <button onClick={handleLike} className="my-5 text-center px-4 py-2 rounded-md bg-blue-700 hover:bg-blue-400 border hover:border-violet-500 text-white font-bold flex items-center gap-2">
                             <AiOutlineLike className="w-5 h-5" /> Like: {likes}
                         </button>

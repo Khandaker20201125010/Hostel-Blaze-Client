@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { IoStar } from "react-icons/io5";
 
 const AllmealscardCollection = ({ item }) => {
     const {
@@ -10,14 +10,14 @@ const AllmealscardCollection = ({ item }) => {
                 <img className="w-80 h-80 group-hover:scale-105 rounded-full" src={mealImage} alt="" />
             </div>
             <div className="flex-grow space-y-2 font-bold">
-                <p>title: {title}</p>
-                <p>University Country : {description}</p>
-                <p className=""><span className="text-bold text-xl">Ingredients:</span> {ingredients}</p>
-                <div>
+                <p>{title}</p>
+                <p>Description: {description}</p>
+                <div className="flex justify-between">
                     <p>Price :  {price}$</p>
+                    <p>Post Time:{postTime}</p>
 
                 </div>
-                <p>Degree : {rating}</p>
+                <p className="flex gap-2">Rating : {rating} <IoStar className="text-xl text-yellow-500" /></p>
             </div>
             <p className="border-b-2 border-blue-500 my-2"></p>
             <div className=" flex justify-center">
