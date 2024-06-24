@@ -1,5 +1,5 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import AllmealscardCollection from "../AllmealscardCollection/AllmealscardCollection";
+
 
 import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa";

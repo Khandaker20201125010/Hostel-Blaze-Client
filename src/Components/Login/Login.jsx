@@ -37,15 +37,15 @@ const Login = () => {
 
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
+                        navigate(location.state?.from || '/');
                         if (res.data.insertedId) {
                             Swal.fire({
                                 title: 'Success!',
                                 text: 'You have successfully logged in',
                                 icon: 'success',
                                 confirmButtonText: 'OK'
-                            }).then(() => {
-                                navigate(location.state?.from || '/');
                             });
+                           
                         }
                     });
             })

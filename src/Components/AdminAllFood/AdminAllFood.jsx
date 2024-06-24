@@ -54,8 +54,8 @@ const AdminAllFood = () => {
     };
 
     return (
-        <div className="m-auto container ">
-            <SectionTitle heading="Manage All Items" subHeading="Hurry up"></SectionTitle>
+        <div className="m-auto container mt-5 ">
+            <SectionTitle heading="All Meals" subHeading="Check all Meals"></SectionTitle>
             <div>
                 <div className="my-5 flex justify-center items-center">
                     <details className="dropdown">

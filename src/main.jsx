@@ -33,6 +33,10 @@ import AdminAddUpcomingMeals from './Components/AdminAddUpcomingMeals/AdminAddUp
 import UserReviews from './Components/UserReviews/UserReviews';
 import EditReview from './Components/EditReview/EditReview';
 import Payment from './Components/Payment/Payment';
+import PaymentHistory from './Components/PaymentHistory/PaymentHistory';
+import AllPayment from './Components/Payment/CheckoutForm/AllPayment';
+import ServeMeals from './Components/ServeMeals/ServeMeals';
+import Error from './Components/Error/Error';
 
 
 
@@ -40,6 +44,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<Error></Error>,
+    
     children: [
       {
         path: '/',
@@ -88,6 +94,7 @@ const router = createBrowserRouter([
   {
     path: 'uDashboard',
     element: <Privetroot><Dashboard></Dashboard></Privetroot>,
+    errorElement:<Error></Error>,
     children: [{
       path: 'requestedMeals',
       element: <RequestedMeals></RequestedMeals>
@@ -109,6 +116,16 @@ const router = createBrowserRouter([
      
     },
     {
+      path: 'allPayment',
+      element: <Privetroot><AllPayment></AllPayment></Privetroot>,
+    
+     
+    },
+    {
+      path: 'paymentHistory',
+      element: <Privetroot><PaymentHistory></PaymentHistory></Privetroot>,
+    },
+    {
       path: 'editReview/:id',
       element: <Privetroot><EditReview></EditReview></Privetroot>,
       loader: ({ params }) => fetch(`http://localhost:5000/meals/${params.id}`)
@@ -116,6 +133,11 @@ const router = createBrowserRouter([
     {
       path: 'manageUsers',
       element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
+
+    },
+    {
+      path: 'serveMeals',
+      element: <AdminRoute><ServeMeals></ServeMeals></AdminRoute>,
 
     },
     {
@@ -131,6 +153,8 @@ const router = createBrowserRouter([
     {
       path: 'adminProfile',
       element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>,
+      loader: () => fetch('http://localhost:5000/users'),
+
 
     },
     {

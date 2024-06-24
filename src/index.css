@@ -208,6 +208,15 @@ h2 {
     background-size: cover;
     height: 70vh;
 }
+.s1{
+    background-image: url('./assets/images/sub.avif');
+    display: flex;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 70vh;
+}
 .d1{
     background-image: url('./assets/images/detailsimg.png');
     display: flex;
@@ -216,5 +225,13 @@ h2 {
     background-repeat: no-repeat;
     background-size: cover;
     height: 70vh;
+}
+
+.ex {
+    background-image: url('./assets/images/404_page_cover.jpg');
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image horizontally and vertically */
+    width: 100%;
+    height: 100vh; /* Sets the height of the element to be 100% of the viewport height */
 }
 

@@ -5,8 +5,12 @@ import { SlLike } from "react-icons/sl";
 import { MdCancel } from "react-icons/md";
 import Swal from "sweetalert2";
 import useCountAxois from "../AxoisHook/useCountAxois";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/Authprovider";
 const RequestedMeals = () => {
-    const [cart,refetch] = useMealQuary();
+    const [cart, refetch] = useMealQuary();
+    const { user } = useContext(AuthContext);
     const axiosSecure = useCountAxois();
     const handleCancle = id => {
         Swal.fire({
@@ -17,31 +21,35 @@ const RequestedMeals = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-           
-            axiosSecure.delete(`/carts/${id}`)
-            .then(res =>{
-                if(res.data.deletedCount >0){
-                    refetch();
-                       Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-                    
-                }
-            })
-            }
-          });
 
-      
-        
+                axiosSecure.delete(`/carts/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+
+                        }
+                    })
+            }
+        });
+
+
+
     }
     return (
         <div className="p-6">
-            <h2 className="text-4xl font-bold mb-6">Your Requested Meals</h2>
+            <h2 className="text-4xl font-bold mb-6">Requested Meals</h2>
             <div className="overflow-x-auto w-full">
+                {/* <div className=" w-full">
+                    <Link to='/uDashboard/allPayment'> <button className="btn bg-blue-900 text w-24 mb-5 mt-5">Pay</button></Link>
+                   
+                </div> */}
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-100">
                         <tr>
@@ -67,39 +75,39 @@ const RequestedMeals = () => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                         {
-                            cart.map((item,index) => <tr key={item._id}>
-                                <td  className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                     {index}
+                            cart.map((item, index) => <tr key={item._id}>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {index}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                   <img className="w-20 h-20 rounded-full" src={item.mealImage} alt="" /> 
+                                    <img className="w-20 h-20 rounded-full" src={item.mealImage} alt="" />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <div className="flex items-center gap-2">
-                                    <SlLike />
-                                        <span>125</span>
+                                        <SlLike />
+                                        <span>{item?.likers?.length}</span>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <div className="flex items-center gap-2">
                                         <FaRegComment />
-                                        <span>42</span>
+                                        <span>{item?.reviews?.length}</span>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Available
+                                      {item?.status}
                                     </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <button onClick={()=>handleCancle (item._id)} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-red-600 hover:text-red-900">
-                                    <MdCancel className="text-2xl" />
+                                    <button onClick={() => handleCancle(item._id)} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-red-600 hover:text-red-900">
+                                        <MdCancel className="text-2xl" />
                                     </button>
                                 </td>
-                             
+
                             </tr>)
                         }
-                        
+
                     </tbody>
                 </table>
             </div>

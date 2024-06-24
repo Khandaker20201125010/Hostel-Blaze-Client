@@ -1,26 +1,24 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/Authprovider";
 import useAxiosSecure from "../../AxoisHook/useAxiosSecure";
-import useMembership from "../../Hooks/useMembership";
-import Swal from "sweetalert2";
 
-const CheckoutForm = () => {
-    const { id } = useParams();
+import Swal from "sweetalert2";
+import useCart from "../../Hooks/useCart";
+
+const AllCheckoutForm = () => {
+
     const { user } = useContext(AuthContext);
-    const memberships = useLoaderData();
-    const membership = memberships?.find(item => item._id === id);
-    const { price, description, badge, features, color,subscribed } = membership;
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
-    const [member, refetch] = useMembership();
+    const [cart, refetch] = useCart();
     const navigate = useNavigate();
 
-    const totalPrice = member.reduce((total, item) => total + item.price, 0);
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
     useEffect(() => {
         if (totalPrice > 0) {
@@ -74,14 +72,13 @@ const CheckoutForm = () => {
                     price: totalPrice,
                     transactionId: paymentIntent.id,
                     date: new Date(),
-                    badge: badge,
                     status:'Pending',
                     subscription:'subscribed'
 
                 };
 
                 try {
-                    const res = await axiosSecure.patch('/users/membership', updatedUser);
+                    const res = await axiosSecure.post('/payments', updatedUser);
                     refetch();
                     if (res.data.message === 'Membership updated successfully') {
                         Swal.fire({
@@ -109,16 +106,11 @@ const CheckoutForm = () => {
             <section>
                 <div className="w-2/3 min-h-screen container m-auto">
                     <div className="shadow-lg shadow-sky-800 flex flex-col group animate__animated animate__bounceIn h-full">
-                        <h3 className={`${color} text-2xl text-center p-2`}>{badge}</h3>
+                       
                         <div className="p-2 flex flex-col flex-grow">
-                            <h1 className="text-center font-bold text-2xl mt-5">Price: {price}$</h1>
-                            <div className="flex-grow space-y-2 mt-5">
-                                <p>Description: {description}</p>
-                                <ul className="list-disc ml-5">
-                                    {features.map((feature, index) => (
-                                        <li key={index}>{feature}</li>
-                                    ))}
-                                </ul>
+                          <div className="flex-grow space-y-2 mt-5">
+                               
+                              
                             </div>
                             <p className="border-b-2 border-blue-500 mt-5 my-2"></p>
                             <CardElement
@@ -147,4 +139,4 @@ const CheckoutForm = () => {
     );
 };
 
-export default CheckoutForm;
+export default AllCheckoutForm;

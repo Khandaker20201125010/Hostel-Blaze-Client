@@ -5,9 +5,7 @@ import userAxiosPublic from "../AxoisHook/userAxiosPublic";
 
 
 const useMeals = () => {
-    const axiosPublic =userAxiosPublic()
-
-
+ const axiosPublic =userAxiosPublic()
 
  const {data: meals =[],isPending:loading,refetch} = useQuery({
     queryKey:['meals'],

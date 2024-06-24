@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import Banner from "../Banner/Banner";
 import MealsCatagory from "../MealsCatagory/MealsCatagory";
 import Membership from "../Memebershipcard/Membership";
+import Opentime from "../Opentime/Opentime";
 
 
 
@@ -16,6 +17,7 @@ const Home = () => {
             <MealsCatagory></MealsCatagory>
             </div>
             <Membership></Membership>
+            <Opentime></Opentime>
            
             
         </div>

@@ -56,7 +56,9 @@ const ManageUsers = () => {
                 <td className="py-3 px-4 border-b border-gray-200">{index+1}</td>
                 <td className="py-3 px-4 border-b border-gray-200">{user.name}</td>
                 <td className="py-3 px-4 border-b border-gray-200">{user.email}</td>
-                <td className="py-3 px-4 border-b border-gray-200">{user.badge}</td>
+                <td className="py-3 px-4 border-b border-gray-200">
+                  {user.subscription ? "Subscribed" : "Unsubscribed"}
+                </td>
                 <td className="py-3 px-4 border-b border-gray-200">
                {user.role === 'admin'? 'Admin': <button onClick={() => handelMakeAdmin(user) }
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"

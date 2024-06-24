@@ -41,8 +41,8 @@ const AdminAllReviews = () => {
     
 
     return (
-        <div className="m-auto container ml-10">
-            <SectionTitle heading="Manage All Items" subHeading="Hurry up"></SectionTitle>
+        <div className="m-auto container ml-10 mt-5">
+            <SectionTitle heading="All reviews" subHeading="Hurry up"></SectionTitle>
             <div>
            
                 

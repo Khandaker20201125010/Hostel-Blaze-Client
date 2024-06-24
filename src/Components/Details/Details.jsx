@@ -10,18 +10,23 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import moment from "moment";
+import useSubscription from "../Hooks/useSubscription";
+import { toast } from "react-toastify";
+import { GoCodeReview } from "react-icons/go";
 
 const Details = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const meals = useLoaderData();
     const details = meals?.find(item => item._id === id);
-    const { _id, title, price, likes, likers, rating, mealImage, description, adminName, ingredients, postTime, category, reviews, email, distributorName } = details;
+    const { _id, title, price, likes, likers, rating, mealImage, description, adminName, ingredients, postTime, category, reviews, email, distributorName, } = details;
     const navigate = useNavigate();
     const axiosSecure = useCountAxois();
     const location = useLocation();
     const [,,refetch] = useMeals();
     const { register, handleSubmit, reset } = useForm();
+   const [isSubscribe] = useSubscription();
+    console.log(isSubscribe)
 
     const handleLike = async () => {
         if (likers.includes(user.email)) return;
@@ -29,6 +34,10 @@ const Details = () => {
         const updatedDetails = { ...details, likers: [...likers, user.email], likes: likes + 1 };
         await axiosSecure.patch(`/meals/like/${id}`, updatedDetails);
         refetch();
+        toast.success("You liked the meal!", {
+            position: "top-end",
+            autoClose: 1500,
+        });
     };
 
     const handleReviews = async (data) => {
@@ -64,47 +73,66 @@ const Details = () => {
     };
 
     const handleAddToCart = () => {
-        if (user && user.email) {
-            //send cart item to the database
-            const cartItem = {
-                menuID: _id,
-                email: user.email,
-                name: user.displayName,
-                mealImage,
-            }
-            axiosSecure.post('/carts', cartItem)
-                .then(res => {
-                    console.log(res.data)
-                    if (res.data.insertedId) {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: `${name} added to your cart`,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        // refetch cart to update the cart items count
-                        refetch();
-                    }
-
-                })
-        }
-        else {
+        if(!isSubscribe){
             Swal.fire({
-                title: "You are not Logged In",
-                text: "Please login to add to the cart?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, login!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    //   send the user to the login page
-                    navigate('/Login', { state: { from: location } })
-                }
+                position: "top-end",
+                icon: "error",
+                title: 'Please Subscribe ',
+                showConfirmButton: false,
+                timer: 1500
             });
+            navigate('/subscription')
+            // refetch cart to update the cart items count
+           
+        }else{
+            if (user && user.email) {
+                //send cart item to the database
+                const cartItem = {
+                    menuID: _id,
+                    email: user.email,
+                    name: user.displayName,
+                    mealImage,
+                    reviews:reviews.length,
+                    likers,
+                    title,
+                    status:'Pending'
+                }
+                axiosSecure.post('/carts', cartItem)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `${name} added to your cart`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            // refetch cart to update the cart items count
+                            refetch();
+                        }
+    
+                    })
+            }
+            else {
+                Swal.fire({
+                    title: "You are not Logged In",
+                    text: "Please login to add to the cart?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, login!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //   send the user to the login page
+                        navigate('/Login', { state: { from: location } })
+                    }
+                });
+            }
+
         }
+       
     }
     
     
@@ -141,6 +169,9 @@ const Details = () => {
                     </div>
                     <p className="font-bold flex items-center gap-1">
                         <AiOutlineLike className="text-blue-500 h-10 w-10" />: {likes}
+                    </p>
+                    <p className="font-bold flex items-center gap-1">
+                        <GoCodeReview className="text-blue-500 h-10 w-10" />:{reviews.length}
                     </p>
 
                     <div className="flex justify-between">

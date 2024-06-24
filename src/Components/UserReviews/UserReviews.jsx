@@ -8,44 +8,51 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/Authprovider";
 
 const UserReviews = () => {
-    const [meals, , refetch] = useMeals();
+    const [meals,, refetch] = useMeals();
     const axiosSecure = useAxiosSecure();
     const [myReviews, setReviews] = useState([]);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        const rev = meals?.filter(item =>
-            item?.reviews?.find(review => review?.reviewerEmail === user?.email)
-        );
-        setReviews(rev);
-    }, [meals, user.email]);
+        console.log("User:", user);
+        console.log("Meals:", meals);
+
+        if (meals && user && user.email) {
+            const rev = meals?.filter(item =>
+                item?.reviews?.some(review => review?.reviewerEmail === user?.email)
+            );
+            console.log("Filtered Reviews:", rev);
+            setReviews(rev);
+        }
+    }, [meals, user]);
 
     const handleDeleteItem = async (item) => {
-        // try {
-        const updatedReviews = item.reviews.filter(review => review.reviewerEmail !== user.email);
-        const updatedItem = { ...item, reviews: updatedReviews };
+        try {
+            const updatedReviews = item.reviews.filter(review => review.reviewerEmail !== user.email);
+            const updatedItem = { ...item, reviews: updatedReviews };
 
-        const response = await axiosSecure.patch(`/meals/reviews/${item._id}`, updatedItem);
+            const response = await axiosSecure.patch(`/meals/reviews/${item._id}`, updatedItem);
 
-        if (response.data.modifiedCount > 0) {
+            if (response.data.modifiedCount > 0) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Review deleted successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                refetch();
+            }
+        } catch (error) {
             Swal.fire({
                 position: 'top-end',
-                icon: 'success',
-                title: 'Review deleted successfully',
+                icon: 'error',
+                title: 'Failed to delete review',
                 showConfirmButton: false,
                 timer: 1500
             });
-            refetch();
+            console.error('Delete Review Error:', error);
         }
-        // } catch (error) {
-        //     Swal.fire({
-        //         position: 'top-end',
-        //         icon: 'error',
-        //         title: 'Failed to delete review',
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        // }
     };
 
     return (
