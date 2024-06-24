@@ -55,13 +55,13 @@ const router = createBrowserRouter([
       {
         path: '/Meals',
         element: <Privetroot><Meals></Meals></Privetroot>,
-        loader: () => fetch('http://localhost:5000/meals')
+        loader: () => fetch('https://hotel-management-server-omega.vercel.app/meals')
 
       },
       {
         path: '/UpcomingMeals',
         element: <Privetroot><UpcomingMealss></UpcomingMealss></Privetroot>,
-        loader: () => fetch('http://localhost:5000/upComingMeals')
+        loader: () => fetch('https://hotel-management-server-omega.vercel.app/upComingMeals')
 
 
       },
@@ -83,7 +83,7 @@ const router = createBrowserRouter([
       {
         path: '/details/:id',
         element: <Privetroot><Details></Details></Privetroot>,
-        loader: () => fetch('http://localhost:5000/meals')
+        loader: () => fetch('https://hotel-management-server-omega.vercel.app/meals')
 
       },
 
@@ -102,17 +102,17 @@ const router = createBrowserRouter([
     {
       path: 'myProfile',
       element: <Privetroot><MyProfile></MyProfile></Privetroot>,
-      loader: () => fetch('http://localhost:5000/users')
+      loader: () => fetch('https://hotel-management-server-omega.vercel.app/users')
     },
     {
       path: 'myReviews',
       element: <Privetroot><UserReviews></UserReviews></Privetroot>,
-      loader: () => fetch('http://localhost:5000/users')
+      loader: () => fetch('https://hotel-management-server-omega.vercel.app/users')
     },
     {
       path: 'payment/:id',
       element: <Privetroot><Payment></Payment></Privetroot>,
-      loader: () => fetch('http://localhost:5000/membership')
+      loader: () => fetch('https://hotel-management-server-omega.vercel.app/membership')
      
     },
     {
@@ -128,7 +128,7 @@ const router = createBrowserRouter([
     {
       path: 'editReview/:id',
       element: <Privetroot><EditReview></EditReview></Privetroot>,
-      loader: ({ params }) => fetch(`http://localhost:5000/meals/${params.id}`)
+      loader: ({ params }) => fetch(`https://hotel-management-server-omega.vercel.app/meals/${params.id}`)
     },
     {
       path: 'manageUsers',
@@ -153,7 +153,7 @@ const router = createBrowserRouter([
     {
       path: 'adminProfile',
       element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>,
-      loader: () => fetch('http://localhost:5000/users'),
+      loader: () => fetch('https://hotel-management-server-omega.vercel.app/users'),
 
 
     },
@@ -166,7 +166,7 @@ const router = createBrowserRouter([
     {
       path: 'updateItem/:id',
       element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-      loader: ({ params }) => fetch(`http://localhost:5000/meals/${params.id}`)
+      loader: ({ params }) => fetch(`https://hotel-management-server-omega.vercel.app/meals/${params.id}`)
 
     },
 
