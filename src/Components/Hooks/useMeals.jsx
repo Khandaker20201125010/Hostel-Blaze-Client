@@ -21,7 +21,7 @@ export default useMeals;
 //  const [meals,setMeals] =useState([]);
 //  const [loading,setloading] = useState(true);
 //  useEffect(()=>{
-//     fetch('https://hotel-management-server-omega.vercel.app/meals')
+//     fetch('http://localhost:5000/meals')
 //     .then(res => res.json())
 //     .then(data =>
 //          {setMeals(data);

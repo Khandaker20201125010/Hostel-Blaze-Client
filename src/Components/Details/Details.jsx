@@ -19,6 +19,7 @@ const Details = () => {
     const { id } = useParams();
     const meals = useLoaderData();
     const details = meals?.find(item => item._id === id);
+    
     const { _id, title, price, likes, likers, rating, mealImage, description, adminName, ingredients, postTime, category, reviews, email, distributorName, } = details;
     const navigate = useNavigate();
     const axiosSecure = useCountAxois();
@@ -27,7 +28,7 @@ const Details = () => {
     const { register, handleSubmit, reset } = useForm();
    const [isSubscribe] = useSubscription();
     console.log(isSubscribe)
-
+    const suggestedMeals = meals.filter(meal => meal.category === category && meal._id !== id); // Exclude the current meal
     const handleLike = async () => {
         if (likers.includes(user.email)) return;
 
@@ -138,16 +139,17 @@ const Details = () => {
     
 
     return (
-        <div>
+        <div className="">
             <Helmet>
                 <title>Details</title>
             </Helmet>
             <div className="d1">
                 <h1 className="mt-72 rounded-xl text-center m-auto bg-black/30 p-10 text-6xl text-white font-bold flex justify-center">Check the Details</h1>
             </div>
-            <div className="md:flex shadow-lg md:p-10">
+            <div className="md:flex gap-2">
+            <div className="md:flex shadow-lg md:p-12">
                 <div className="md:flex-1 flex justify-center">
-                    <img className="w-[600px] h-[450px] max-sm:mb-5 rounded-2xl" src={mealImage} alt={title} />
+                    <img className="w-[500px] h-[450px] max-sm:mb-5 rounded-2xl" src={mealImage} alt={title} />
                 </div>
 
                 <div className='md:flex-1 md:space-y-3'>
@@ -198,7 +200,26 @@ const Details = () => {
                         </button>
                     </div>
                 </div>
+                
             </div>
+            {/* suggest meals */}
+            <div className="mt-10 ">
+                <h2 className="text-2xl font-bold">You might also like</h2>
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-5 mt-5">
+                    {suggestedMeals.map(meal => (
+                        <div key={meal._id} className="border rounded-lg shadow-lg p-4">
+                            <img className="w-full h-32 rounded-t-lg object-cover" src={meal.mealImage} alt={meal.title} />
+                            <h3 className="font-bold text-lg mt-2">{meal.title}</h3>
+                            <p className="text-sm text-gray-600">Price: {meal.price} $</p>
+                            <Link to={`/details/${meal._id}`} className="text-blue-500 mt-2 inline-block">View Details</Link>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            </div>
+           
+           
+            
         </div>
     );
 };

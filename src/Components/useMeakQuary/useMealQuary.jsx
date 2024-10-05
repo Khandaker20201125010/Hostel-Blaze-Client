@@ -10,7 +10,7 @@ const useMealQuary = () => {
         queryKey: ['cart', user?.email],
         enabled: !!user?.email, // Ensure the query runs only if the user email is available
         queryFn: async () => {
-            const res = await axiosSecure.get(`/carts?email=${user.email}`);
+            const res = await axiosSecure.get(`/carts?email=${user?.email}`);
             return res.data;
         }
     });

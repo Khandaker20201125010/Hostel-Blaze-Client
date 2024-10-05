@@ -7,7 +7,7 @@ const ServeMeals = () => {
     useEffect(() => {
         const fetchRequestedMeals = async () => {
             try {
-                const response = await axios.get('https://hotel-management-server-omega.vercel.app/requested-meals');
+                const response = await axios.get('http://localhost:5000/requested-meals');
                 console.log(response.data); // Debugging: Log the API response
                 setRequestedMeals(response.data);
             } catch (error) {
@@ -20,8 +20,8 @@ const ServeMeals = () => {
 
     const serveMeal = async (id) => {
         try {
-            await axios.patch(`https://hotel-management-server-omega.vercel.app/requested-meals/${id}/deliver`);
-            const response = await axios.get('https://hotel-management-server-omega.vercel.app/requested-meals');
+            await axios.patch(`http://localhost:5000/requested-meals/${id}/deliver`);
+            const response = await axios.get('http://localhost:5000/requested-meals');
             setRequestedMeals(response.data);
         } catch (error) {
             console.error('Error serving meal:', error);
