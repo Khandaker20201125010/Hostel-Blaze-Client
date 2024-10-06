@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/Authprovider";
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://hostel-blaze-server.vercel.app'
 });
 const UseAxoisHook = () => {
     const {logOut } = useContext(AuthContext)

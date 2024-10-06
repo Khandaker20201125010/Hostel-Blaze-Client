@@ -82,7 +82,8 @@ const RightFoodChart = () => {
                 <ReactApexChart options={chartData.options} series={chartData.series} type="radialBar" height={390} />
                 <p className='text-center font-bold text-blue-500'>Total Food</p>
             </div>
-
+            
+            
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Providers/Authprovider";
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://hostel-blaze-server.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();
