@@ -60,29 +60,29 @@ h2 {
 }
 
 .input-box {
-  position: relative;
-  margin: 25px 0;
+    position: relative;
+    margin: 25px 0;
 }
 
 .input-box input {
-  width: 100%;
-  height: 50px;
-  background: transparent;
-  border: 2px solid #2c4766;
-  outline: none;
-  border-radius: 40px;
-  font-size: 1em;
-  color: #fff;
-  padding: 0 20px;
-  transition: .5s ease;
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #2c4766;
+    outline: none;
+    border-radius: 40px;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 20px;
+    transition: .5s ease;
 }
 
 .eye-icon {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 
@@ -144,60 +144,85 @@ h2 {
 .signup-link a:hover {
     text-decoration: underline;
 }
-.lk{
-  background-image: url('./assets/images/blackbg.jpg');;
+
+.lk {
+    background-image: url('./assets/images/blackbg.jpg');
+    background-size: cover;
+    /* Ensures the image covers the entire background */
+    background-position: center;
+    /* Centers the image horizontally and vertically */
+    width: 100%;
+    height: 100vh;
+    /* Sets the height of the element to be 100% of the viewport height */
 }
+
 @keyframes changeColors {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .text-gradient {
-    background: linear-gradient(to right, #6a51da,#022e8b, #8305bd);
+    background: linear-gradient(to right, #6a51da, #022e8b, #8305bd);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: changeColors 5s infinite;
 }
+
 .banner-image {
     width: 100%;
     height: 120vh;
     object-fit: cover;
 }
-.carousel .slider-wrapper{
-  width: 100%;
-  height: 600px;
+
+.carousel .slider-wrapper {
+    width: 100%;
+    height: 600px;
 
 }
+
 .carousel .thumb {
-    width: 100px; /* Adjust the width as needed */
-    height: 60px;  /* Adjust the height as needed */
-    margin: 0 5px; /* Add some margin for spacing */
-  }
-  
-  .carousel .thumb img {
-    width: 100%; /* Ensure the image fits the thumb container */
-    height: auto;
-  }
-  
-  /* Additional customization for selected thumbnails */
-  .carousel .thumb.selected,
-  .carousel .thumb:hover {
-    border: 2px solid #0ef; /* Customize the border for selected or hovered thumbnails */
-  }
-.carousel{
-  text-align: center;
+    width: 100px;
+    /* Adjust the width as needed */
+    height: 60px;
+    /* Adjust the height as needed */
+    margin: 0 5px;
+    /* Add some margin for spacing */
 }
+
+.carousel .thumb img {
+    width: 100%;
+    /* Ensure the image fits the thumb container */
+    height: auto;
+}
+
+/* Additional customization for selected thumbnails */
+.carousel .thumb.selected,
+.carousel .thumb:hover {
+    border: 2px solid #0ef;
+    /* Customize the border for selected or hovered thumbnails */
+}
+
+.carousel {
+    text-align: center;
+}
+
 .tab-list .react-tabs__tab--selected {
-   
-    background: linear-gradient(to right, #6a51da,#2956b8, #8305bd);
+
+    background: linear-gradient(to right, #6a51da, #2956b8, #8305bd);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: changeColors 5s infinite;
     font-weight: bold;
 }
-.b1{
+
+.b1 {
     background-image: url('./assets/images/b1.jpg');
     display: flex;
     width: 100%;
@@ -206,7 +231,8 @@ h2 {
     background-size: cover;
     height: 70vh;
 }
-.s1{
+
+.s1 {
     background-image: url('./assets/images/sub.avif');
     display: flex;
     width: 100%;
@@ -215,7 +241,8 @@ h2 {
     background-size: cover;
     height: 70vh;
 }
-.d1{
+
+.d1 {
     background-image: url('./assets/images/detailsimg.png');
     display: flex;
     width: 100%;
@@ -227,9 +254,11 @@ h2 {
 
 .ex {
     background-image: url('./assets/images/404_page_cover.jpg');
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image horizontally and vertically */
+    background-size: cover;
+    /* Ensures the image covers the entire background */
+    background-position: center;
+    /* Centers the image horizontally and vertically */
     width: 100%;
-    height: 100vh; /* Sets the height of the element to be 100% of the viewport height */
+    height: 100vh;
+    /* Sets the height of the element to be 100% of the viewport height */
 }
-

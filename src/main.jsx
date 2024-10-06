@@ -37,6 +37,7 @@ import PaymentHistory from './Components/PaymentHistory/PaymentHistory';
 import AllPayment from './Components/Payment/CheckoutForm/AllPayment';
 import ServeMeals from './Components/ServeMeals/ServeMeals';
 import Error from './Components/Error/Error';
+import FoodChart from './Components/FoodChart/FoodChart';
 
 
 
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
       {
         path: '/subscription',
         element: <Privetroot><Subscription></Subscription></Privetroot>,
+
+      },
+      {
+        path: '/foodChart',
+        element: <Privetroot><FoodChart></FoodChart></Privetroot>,
+        loader: () => fetch('http://localhost:5000/meals')
 
       },
     

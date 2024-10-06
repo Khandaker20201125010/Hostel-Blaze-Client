@@ -147,7 +147,7 @@ const Details = () => {
                 <h1 className="mt-72 rounded-xl text-center m-auto bg-black/30 p-10 text-6xl text-white font-bold flex justify-center">Check the Details</h1>
             </div>
             <div className="md:flex gap-2">
-            <div className="md:flex shadow-lg md:p-10 gap-5 " >
+            <div className="md:flex shadow-lg md:p-10 gap-5     " >
                 <div className="md:flex-1 flex justify-center">
                     <img className="w-[500px] h-[450px] max-sm:mb-5 rounded-2xl" src={mealImage} alt={title} />
                 </div>
