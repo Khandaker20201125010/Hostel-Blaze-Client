@@ -20,7 +20,7 @@ const Details = () => {
     const meals = useLoaderData();
     const details = meals?.find(item => item._id === id);
     
-    const { _id, title, price, likes, likers, rating, mealImage, description, adminName, ingredients, postTime, category, reviews, email, distributorName, } = details;
+    const { _id, title, price, likes, likers, rating, mealImage, description, adminName, ingredients, postTime, category, reviews } = details;
     const navigate = useNavigate();
     const axiosSecure = useCountAxois();
     const location = useLocation();

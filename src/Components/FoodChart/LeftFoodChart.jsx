@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { useLoaderData } from 'react-router-dom';
 
@@ -11,12 +11,12 @@ const LeftFoodChart = () => {
         }],
         options: {
             chart: {
-                height: 350,
+                height: 450,
                 type: 'bar',
             },
             plotOptions: {
                 bar: {
-                    borderRadius: 10,
+                    borderRadius: 2,
                     dataLabels: {
                         position: 'top',
                     },
@@ -27,7 +27,7 @@ const LeftFoodChart = () => {
                 formatter: function (val) {
                     return val + "%";
                 },
-                offsetY: -20,
+                offsetY: -25,
                 style: {
                     fontSize: '12px',
                     colors: ["#304758"]
@@ -35,7 +35,7 @@ const LeftFoodChart = () => {
             },
             xaxis: {
                 categories: [], // Initialize with empty categories
-                position: 'down',
+                position: 'bottom', // Adjusts the position of the x-axis labels
                 axisBorder: {
                     show: false
                 },
@@ -44,6 +44,14 @@ const LeftFoodChart = () => {
                 },
                 tooltip: {
                     enabled: true,
+                },
+                labels: {
+                    rotate: -26, // Rotate labels for better visibility
+                    style: {
+                        fontSize: '10px', // Adjust font size for better readability
+                        colors: ['#000'],
+                        fontWeight: 'bold', // Set the color of the food names
+                    }
                 }
             },
             yaxis: {
@@ -60,15 +68,7 @@ const LeftFoodChart = () => {
                     }
                 }
             },
-            title: {
-                text: 'Monthly Meal Ratings',
-                floating: true,
-                offsetY: 330,
-                align: 'center',
-                style: {
-                    color: '#444'
-                }
-            }
+            
         }
     });
 
@@ -95,8 +95,9 @@ const LeftFoodChart = () => {
 
     return (
         <div>
-            <div id="chart">
-                <ReactApexChart options={chartData.options} series={chartData.series} type="bar" height={350} />
+            <div id="chart sm:w-full">
+                <ReactApexChart options={chartData.options} series={chartData.series} type="bar" height={400} />
+                <p className='text-center font-bold text-blue-500'>Monthly Meal Ratings</p>
             </div>
         </div>
     );
