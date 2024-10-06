@@ -14,6 +14,8 @@ const Meals = () => {
     const [, setItem] = useState([]);
     
 
+    
+
     useEffect(() => {
         setFilteredMeals(meals.filter(meal => meal.title && meal.title.toLowerCase().includes(search.toLowerCase())));
     }, [search, meals]);
