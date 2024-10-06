@@ -13,6 +13,9 @@ const LeftFoodChart = () => {
             chart: {
                 height: 450,
                 type: 'bar',
+                toolbar: {
+                    show: false // Disable the chart toolbar
+                }
             },
             plotOptions: {
                 bar: {

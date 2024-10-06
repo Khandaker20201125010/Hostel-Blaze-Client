@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/Authprovider";
-import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+
 import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
