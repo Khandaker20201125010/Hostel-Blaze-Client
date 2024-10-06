@@ -67,6 +67,16 @@ const Nav = () => {
                     Upcoming Meals
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive ? 'btn btn-outline bg-gradient-to-r from-violet-950 to-blue-900  hover:bg-blue-800 text-white' : 'font-bold'
+                    }
+                    to="/foodChart"
+                >
+                    Meals Chart
+                </NavLink>
+            </li>
         </>
     );
 
