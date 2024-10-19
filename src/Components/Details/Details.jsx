@@ -196,7 +196,7 @@ const Details = () => {
                         </dialog>
                         <button onClick={handleAddToCart} className="my-5 text-center px-4 py-2 rounded-md bg-blue-700 hover:bg-blue-400 border hover:border-violet-500 text-white font-bold">Request meal</button>
                         <button onClick={handleLike} className="my-5 text-center px-4 py-2 rounded-md bg-blue-700 hover:bg-blue-400 border hover:border-violet-500 text-white font-bold flex items-center gap-2">
-                            <AiOutlineLike className="w-5 h-5" /> Like: {likes}
+                            <AiOutlineLike className="w-5 h-5 font-bold" /> Like: {likes}
                         </button>
                     </div>
                 </div>
