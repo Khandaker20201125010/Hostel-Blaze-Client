@@ -59,7 +59,7 @@ const UpcomingMealss = () => {
         <div>
             <div className="b1">
                 <div className="bg-black/30 w-full text-center">
-                    <h1 className="p-40 text-white text-6xl">Upcoming Meals</h1>
+                    <h1 className="md:p-40 p-10 text-white text-6xl">Upcoming Meals</h1>
                     <form onSubmit={handleSearch} className="my-5">
                         <div className="flex md:w-2/4 m-auto">
                             <input

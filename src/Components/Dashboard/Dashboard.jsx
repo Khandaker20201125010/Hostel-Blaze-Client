@@ -10,7 +10,7 @@ import useAdmin from "../AxoisHook/useAdmin";
 const Dashboard = () => {
     const [isAdmin] = useAdmin()
     return (
-        <div className="flex">
+        <div className="flex" >
             <div className="ml-20 w-64 min-h-screen bg-gradient-to-r from-violet-950 to-blue-900 ">
 
                 {

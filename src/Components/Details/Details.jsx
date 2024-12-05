@@ -27,8 +27,7 @@ const Details = () => {
     const [,,refetch] = useMeals();
     const { register, handleSubmit, reset } = useForm();
    const [isSubscribe] = useSubscription();
-    console.log(isSubscribe)
-    const suggestedMeals = meals.filter(meal => meal.category === category && meal._id !== id); // Exclude the current meal
+  const suggestedMeals = meals.filter(meal => meal.category === category && meal._id !== id); // Exclude the current meal
     const handleLike = async () => {
         if (likers.includes(user.email)) return;
 
@@ -206,12 +205,12 @@ const Details = () => {
             <div className="mt-10 ">
                 <h2 className="text-2xl font-bold">You might also like</h2>
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-5 mt-5">
-                    {suggestedMeals.map(meal => (
-                        <div key={meal._id} className="border rounded-lg shadow-lg p-4">
-                            <img className="w-full h-32 rounded-t-lg object-cover" src={meal.mealImage} alt={meal.title} />
-                            <h3 className="font-bold text-lg mt-2">{meal.title}</h3>
-                            <p className="text-sm text-gray-600">Price: {meal.price} $</p>
-                            <Link to={`/details/${meal._id}`} className="text-blue-500 mt-2 inline-block">View Details</Link>
+                    {suggestedMeals.map(meals => (
+                        <div key={meals._id} className="border rounded-lg shadow-lg p-4">
+                            <img className="w-full h-32 rounded-t-lg object-cover" src={meals.mealImage} alt={meals.title} />
+                            <h3 className="font-bold text-lg mt-2">{meals.title}</h3>
+                            <p className="text-sm text-gray-600">Price: {meals.price} $</p>
+                            <Link to={`/details/${meals._id}`} className="text-blue-500 mt-2 inline-block">View Details</Link>
                         </div>
                     ))}
                 </div>

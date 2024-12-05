@@ -142,7 +142,7 @@ const Login = () => {
     };
 
     return (
-        <div className="h-full flex justify-center items-center lk">
+        <div className="h-full w-full flex justify-center items-center lk">
             <Helmet>
                 <title>Login</title>
             </Helmet>

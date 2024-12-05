@@ -11,7 +11,7 @@ const AdminProfile = () => {
     const myMeals = meals?.filter(meal =>meal?.email === user?.email)
     console.log(myMeals)
    
-    const loggedInUser = users.find(userInfo => userInfo?.email === user?.email);
+    const loggedInUser = users?.find(userInfo => userInfo?.email === user?.email);
 
     return (
         <div className="flex justify-center items-center min-h-screen">
