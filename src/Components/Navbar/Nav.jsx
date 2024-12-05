@@ -94,7 +94,7 @@ const Nav = () => {
     <div className="navbar lg:fixed lg:z-10 md:fixed md:z-10 bg-opacity-30 w-full bg-black font-bold text-white">
       <div className="navbar-start">
         <div className="dropdown text-black">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-purple-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-10 w-10"
@@ -217,13 +217,13 @@ const Nav = () => {
         {user ? (
           <button
             onClick={handelSignOut}
-            className="btn bg-gradient-to-r from-violet-950 to-blue-900 hover:bg-blue-900  text-white font-extrabold w-28 max-sm:hidden"
+            className="btn bg-gradient-to-r from-violet-950 to-blue-900 hover:bg-blue-900  text-white font-extrabold w-28 md:hidden max-sm:hidden"
           >
             Log Out
           </button>
         ) : (
           <NavLink to="/Login">
-            <button className="btn bg-gradient-to-r from-violet-950 to-blue-900 font-extrabold hover:bg-violet-900 text-white w-28 max-sm:hidden">
+            <button className="btn bg-gradient-to-r from-violet-950 to-blue-900 font-extrabold hover:bg-violet-900 text-white w-28 max-sm:hidden md:hidden">
               Join us
             </button>
           </NavLink>
